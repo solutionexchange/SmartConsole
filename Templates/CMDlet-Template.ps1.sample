@@ -1,0 +1,85 @@
+﻿function Verb-... {
+    <#
+    .SYNOPSIS
+       ... {SYNOPSIS} ...
+    .DESCRIPTION
+       ... {DESCRIPTION} ...
+    .EXAMPLE
+       ... {EXAMPLE} ...
+    .INPUTS
+       ... {INPUTS} ...
+    .OUTPUTS
+       ... {OUTPUTS} ...
+    .LINK
+       ... {LINK} ...
+    .NOTES
+       ... {NOTES} ...
+    #>
+    [Alias('Verb-...Alias')]
+    [CmdletBinding(DefaultParameterSetName = 'ParameterSet1')]
+    param(
+        # ... {PARAM#1} ...
+        [Parameter(
+            Position = 0,
+            Mandatory = $true,
+            ParameterSetName = 'ParameterSet1',
+            ValueFromPipelineByPropertyName = $true
+        )]
+        [Alias('Key')]
+        [String[]] $Project,
+
+        # ... {PARAM#2} ...
+        [Parameter(
+            Position = 1,
+            Mandatory = $false,
+            ParameterSetName = 'ParameterSet1'
+        )]
+        [Alias('Versions')]
+        [String[]] $Name,
+
+        # ... {PARAM#2} ...
+        [Parameter(
+            Position = 2,
+            Mandatory = $true,
+            ParameterSetName = 'ParameterSet2',
+            ValueFromPipelineByPropertyName = $true
+        )]
+        [Int[]] $Id
+    )
+    begin {
+        Write-Debug -Message ("... {DEBUG#1} ...");
+        #$server = Get-JiraConfigServer -ConfigFile $ConfigFile -ErrorAction Stop
+
+        Write-Debug -Message ("... {DEBUG#2} ...");
+    }
+    process {
+        switch ($PSCmdlet.ParameterSetName) {
+            'ParameterSet1' {
+                #foreach ($_project in $Project) {
+                Write-Debug -Message ("... {DEBUG#3} ...");
+                #$projectData = Get-JiraProject -Project $_project -Credential $Credential
+                #$restUrl = "$server/rest/api/latest/project/$($projectData.key)/versions"
+
+                Write-Debug -Message ("... {DEBUG#4} ...");
+                #$result = Invoke-JiraMethod -Method Get -URI $restUrl -Credential $Credential
+
+                #If ($Name) {
+                #$result = $result | Where-Object {$_.Name -in $Name}
+                #}
+                #$result | ConvertTo-JiraVersion -Credential $Credential
+                #}
+            }
+            'ParameterSet2' {
+                #foreach ($_id in $ID) {
+                #$restUrl = "$server/rest/api/latest/version/$_id"
+
+                Write-Debug -Message ("... {DEBUG#5} ...");
+                #Invoke-JiraMethod -Method Get -URI $restUrl -Credential $Credential | ConvertTo-JiraVersion -Credential $Credential
+                #}
+            }
+        }
+    }
+    end {
+        Write-Debug -Message ("... {DEBUG#6} ...");
+    }
+}

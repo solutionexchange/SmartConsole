@@ -1,0 +1,42 @@
+function Verb-Action {
+    <#
+    .SYNOPSIS
+        ... {SYNOPSIS} ...
+    .DESCRIPTION
+        ... {DESCRIPTION} ...
+    .EXAMPLE
+        ... {EXAMPLE} ...
+    .INPUTS
+        ... {INPUTS} ...
+    .OUTPUTS
+        ... {OUTPUTS} ...
+    .LINK
+        ... {LINK} ...
+    .NOTES
+        ... {NOTES} ...
+    #>
+    [Alias('Verb-ActionAlias')]
+    [CmdletBinding(DefaultParameterSetName = 'byCmsSession')]
+    param(
+        # {DESCRIPTION}
+        [Parameter(
+            Position = 0,
+            Mandatory = $true,
+            ParameterSetName = 'byCmsSession'
+        )]
+        [ValidateNotNullOrEmpty()]
+        [ValidateNotNull()]
+        [ValidateSet('A','B')]
+        [string] $Value
+    )
+    begin {
+        Write-Debug -Message ("[ Enter => function {0} ]" -f $MyInvocation.MyCommand);
+    }
+    process {
+        Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
+
+    }
+    end {
+        Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);
+    }
+}
