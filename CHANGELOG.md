@@ -4,12 +4,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
-## v0.1.9 - 2018-02-dd
-
-### New Features
-
-- ...
-
+## v0.1.9 - 2018-02-01
 
 
 ### Breaking changes
@@ -18,27 +13,13 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
-### Engine updates and fixes
-
-- ...
-
-
-
-### General cmdlet updates and fixes
-
-- ...
-
-
-
-### Code Cleanup
-
-- ...
-
 
 
 ### Test, Build and Packaging Improvements
 
-- ...
+- Fix import issue, after reorganization into subdirectories.
+
+
 
 
 
@@ -48,15 +29,12 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
-### Compliance Work
-
-- ...
-
-
 
 ### Overview
 
 - Read the [OVERVIEW.md](Wiki/OVERVIEW.md) document for more information.
+
+
 
 
 
@@ -66,10 +44,11 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
+
+
 ### Known Issues
 
 - Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
-
 
 
 ------
