@@ -82,7 +82,7 @@ The desktop edition is necessary. For current limitations, please read the [KNOW
    and then enter the username and password for the OpenText™ Web Site Management Server:
    ​
 
-   ![Screenshot of the Credentials input](Wiki\Images\screenshot-set-securepasswordfile-01.jpg)
+   ![Screenshot of the Credentials input](Wiki/Images/screenshot-set-securepasswordfile-01.jpg)
 
    ​
 
