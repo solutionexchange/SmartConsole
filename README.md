@@ -8,9 +8,9 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 For more information about *SmartConsole for Web Site Management*, please have a look into these documents:
 
-- [CHANGELOG](CHANGELOG.md)
-- [OVERVIEW](WIKI\OVERVIEW.md)
-- [FAQ](Wiki\FAQ.md)
+- [CHANGELOG](Wiki/CHANGELOG.md)
+- [OVERVIEW](Wiki/OVERVIEW.md)
+- [FAQ](Wiki/FAQ.md)
 
 
 

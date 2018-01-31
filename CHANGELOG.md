@@ -8,7 +8,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### New Features
 
-- New aliases added per command, MS=CMS and DS=CPS. For more details, please have a look into the [OVERVIEW.md](Wiki\OVERVIEW.md) document.
+- New aliases added per command, MS=CMS and DS=CPS. For more details, please have a look into the [OVERVIEW.md](Wiki/OVERVIEW.md) document.
 
 
 
@@ -16,7 +16,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### Breaking changes
 
-- Read the [BREAKINGCHANGES.md](\wiki\BREAKINGCHANGES.md) document for more information.
+- Read the [BREAKINGCHANGES.md](Wiki/BREAKINGCHANGES.md) document for more information.
 
 
 
@@ -54,7 +54,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### Overview
 
-- Read the [OVERVIEW.md](\wiki\OVERVIEW.md) document for more information.
+- Read the [OVERVIEW.md](Wiki/OVERVIEW.md) document for more information.
 
 
 
@@ -62,7 +62,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### FAQ
 
-- Read the [FAQ.md](\wiki\FAQ.md) document for more information.
+- Read the [FAQ.md](Wiki/FAQ.md) document for more information.
 
 
 
@@ -70,7 +70,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### Known Issues
 
-- Read the [KNOWNISSUES.md](\wiki\KNOWNISSUES.md) document for more information.
+- Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
 
 
 
@@ -91,7 +91,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### Breaking changes
 
-- Read the [BREAKINGCHANGES.md](\wiki\BREAKINGCHANGES.md) document for more information.
+- Read the [BREAKINGCHANGES.md](Wiki/BREAKINGCHANGES.md) document for more information.
 
 
 
@@ -116,7 +116,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### Overview
 
-- Read the [OVERVIEW.md](\wiki\OVERVIEW.md) document for more information.
+- Read the [OVERVIEW.md](Wiki/OVERVIEW.md) document for more information.
 
 
 
@@ -124,7 +124,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### FAQ
 
-- Read the [FAQ.md](\wiki\FAQ.md) document for more information.
+- Read the [FAQ.md](Wiki/FAQ.md) document for more information.
 
 
 
@@ -132,7 +132,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### Known Issues
 
-- Read the [KNOWNISSUES.md](\wiki\KNOWNISSUES.md) document for more information.
+- Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
 
 
 
@@ -146,7 +146,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### Breaking changes
 
-- Read the [BREAKINGCHANGES.md](\wiki\BREAKINGCHANGES.md) document for more information.
+- Read the [BREAKINGCHANGES.md](Wiki/BREAKINGCHANGES.md) document for more information.
 
 
 
@@ -192,7 +192,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### Overview
 
-- Read the [OVERVIEW.md](\wiki\OVERVIEW.md) document for more information.
+- Read the [OVERVIEW.md](Wiki/OVERVIEW.md) document for more information.
 
 
 
@@ -200,11 +200,11 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### FAQ
 
-- Read the [FAQ.md](\wiki\FAQ.md) document for more information.
+- Read the [FAQ.md](Wiki/FAQ.md) document for more information.
 
 
 
 
 ### Known Issues
 
-- Read the [KNOWNISSUES.md](\wiki\KNOWNISSUES.md) document for more information.
+- Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
