@@ -8,7 +8,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### Management Server
 
-*Note: ***** marks all aliases of a command.*
+*Note: * marks all aliases of a command.*
 
 
 
@@ -16,17 +16,17 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ##### Configuration store management
 
-- `Register-MSConfigStore`
+- `Register-MSConfigStore` | 
   `Register-CMSConfigStore` *
-- `Unregister-MSConfigStore`
+- `Unregister-MSConfigStore` | 
   `Unregister-CMSConfigStore` *
-- `Show-MSConfigStore`
+- `Show-MSConfigStore` | 
   `Show-CMSConfigStore` *
-- `Clear-MSConfigStore`
+- `Clear-MSConfigStore` | 
   `Clear-CMSConfigStore` *
-- `Set-MSConfigActiveSession`
+- `Set-MSConfigActiveSession` | 
   `Set-CMSConfigActiveSession` *
-- `Get-MSConfigActiveSession`
+- `Get-MSConfigActiveSession` | 
   `Get-CMSConfigActiveSession` *
 
 
@@ -35,25 +35,25 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ##### Session management
 
-- `Register-MSSession`
+- `Register-MSSession` | 
   `Register-CMSSession` *
-- `Select-MSSession`
+- `Select-MSSession` | 
   `Select-CMSSession` *
-- `Unregister-MSSession`
+- `Unregister-MSSession` | 
   `Unregister-CMSSession` *
-- `Clear-MSSession`
+- `Clear-MSSession` | 
   `Clear-CMSSession` *
-- `Show-MSSession`
+- `Show-MSSession` | 
   `Show-CMSSession` *
-- `Set-MSSessionProperty`
+- `Set-MSSessionProperty` | 
   `Set-CMSSessionProperty` *
-- `Get-MSSessionProperty`
+- `Get-MSSessionProperty` | 
   `Get-CMSSessionProperty` *
-- `Import-MSSessionProperties`
+- `Import-MSSessionProperties` | 
   `Import-CMSSessionProperties` *
-- `Get-MSSessionWebService`
+- `Get-MSSessionWebService` | 
   `Get-CMSSessionWebService` *
-- `Set-MSTimestamp`
+- `Set-MSTimestamp` | 
   `Set-CMSTimestamp ` *
 
 
@@ -61,7 +61,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ##### Communication
 
-- `Invoke-MSRQLRequest`
+- `Invoke-MSRQLRequest` | 
   `Invoke-CMSRQLRequest ` *
 
 
@@ -69,11 +69,11 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ##### Debugging
 
-- `Set-MSConfigDebugMode`
+- `Set-MSConfigDebugMode` | 
   `Set-CMSConfigDebugMode` *
-- `Get-MSConfigDebugMode`
+- `Get-MSConfigDebugMode` | 
   `Get-CMSConfigDebugMode` *
-- `Show-MSSessionWebServiceDebug`
+- `Show-MSSessionWebServiceDebug` | 
   `Show-CMSSessionWebServiceDebug` *
 
 
@@ -81,7 +81,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ##### Configuration files
 
-- `configuration.xml`
+- `configuration.xml` used for "default settings".
 - `configuration.xml.sample`
 
 
@@ -95,9 +95,9 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ##### Logon and Logout
 
-- `Enter-MSSession`
+- `Enter-MSSession` | 
   `Enter-CMSSession ` *
-- `Exit-MSSession`
+- `Exit-MSSession` | 
   `Exit-CMSSession` *
 
 
@@ -106,7 +106,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ##### Page preview
 
-- `Get-MSPagePreview`
+- `Get-MSPagePreview` | 
   `Get-CMSPagePreview` *
 
 
@@ -173,7 +173,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ##### Special Pages
 
-- `Find-MSSpecialPages`
+- `Find-MSSpecialPages` | 
   `Find-CMSSpecialPages` *
 
 
@@ -196,7 +196,7 @@ The following topics are covered:
 
 The application server is the server where the Management Server software is installed. You use it to archive and administer all files, projects, user data, content classes, and so on.
 
-- `Get-MSAllApplicationServers`
+- `Get-MSAllApplicationServers` | 
   `Get-CMSAllApplicationServers` *
 
 
@@ -211,11 +211,11 @@ Therefore, the server response for an asynchronous process confirms neither comp
 
 RQL queries that are based directly on the results of asynchronous processes may deliver incorrect results. You should take this into account when creating scripts with several steps.
 
-- `Get-MSAsyncQueueProcess`
+- `Get-MSAsyncQueueProcess` | 
   `Get-CMSAsyncQueueProcess` *
-- `Get-MSAsyncQueueProcessList`
+- `Get-MSAsyncQueueProcessList` | 
   `Get-CMSAsyncQueueProcessList` *
-- `Start-MSAsyncQueueProcess`
+- `Start-MSAsyncQueueProcess` | 
   `Start-CMSAsyncQueueProcess` *
 
 
@@ -238,9 +238,9 @@ The following topics are covered:
 
 You can administer and edit the user data from all Management Server projects centrally.
 
-- `Get-MSAllUsers`
+- `Get-MSAllUsers` | 
   `Get-CMSAllUsers` *
-- `Get-MSAllLoggedOnUsers`
+- `Get-MSAllLoggedOnUsers` | 
   `Get-CMSAllLoggedOnUsers` *
 
 
@@ -251,7 +251,7 @@ You can administer and edit the user data from all Management Server projects ce
 
 Enables you to administer the user data for one or more projects.
 
-- `Get-MSUserOfProject`
+- `Get-MSUserOfProject` | 
   `Get-CMSUserOfProject` *
 
 
@@ -274,9 +274,9 @@ The following topics are covered:
 
 You can create, rename, copy, export, import, and delete projects.
 
-- `Enter-MSProject`
+- `Enter-MSProject` | 
   `Enter-CMSProject` *
-- `Get-MSProjectData`
+- `Get-MSProjectData` | 
   `Get-CMSProjectData` *
 
 
@@ -289,7 +289,7 @@ As soon as you create a new project, Management Server creates a project variant
 
 You can split a project based on the project variants and assign it to specific other areas of the project, or prohibit multi-format publication starting with a specific link.
 
-- `Get-MSAllProjectVariants`
+- `Get-MSAllProjectVariants` | 
   `Get-CMSAllProjectVariants` *
 
 
@@ -302,7 +302,7 @@ You use folders to store the text, image, HTML and media data of a project, alon
 
 There are different types of folders like File Folders, Content Class Folders, Asset Managers, a.s.o.
 
-- `Get-MSContentClassFolders`
+- `Get-MSContentClassFolders` | 
   `Get-CMSContentClassFolders` *
 
 
@@ -323,9 +323,9 @@ The following topics are covered:
 
 ##### Pages
 
-- `New-MSPage`
+- `New-MSPage` | 
   `New-CMSPage` *
-- `Remove-MSPage`
+- `Remove-MSPage` | 
   `Remove-CMSPage` *
 
 
@@ -348,13 +348,13 @@ The following topics are covered:
 
 Content classes identify an object class used for storing content. They are the basis of every page in Management Server and represent the foundation of a project. Template identifies the content class format, for example, HTML - the code used to enter elements in the content class.
 
-- `Get-MSContentClasses`
+- `Get-MSContentClasses` | 
   `Get-CMSContentClasses` *
-- `Get-MSContentClassData`
+- `Get-MSContentClassData` | 
   `Get-CMSContentClassData` *
-- `Get-MSContentClassAllProperties`
+- `Get-MSContentClassAllProperties` | 
   `Get-CMSContentClassAllProperties` *
-- `Get-MSContentClassProjectVariants`
+- `Get-MSContentClassProjectVariants` | 
   `Get-CMSContentClassProjectVariants` *
 
 
@@ -365,9 +365,9 @@ Content classes identify an object class used for storing content. They are the 
 
 A content class can have several templates. The content class represents the basic structure of a page, which can be published in various formats. The templates contain the various codes, which allow you to publish projects in various formats, such as HTM, WML, or SGML.
 
-- `Get-MSContentClassDisplayFormat`
+- `Get-MSContentClassDisplayFormat` | 
   `Get-CMSContentClassDisplayFormat` *
-- `Get-MSContentClassTemplates`
+- `Get-MSContentClassTemplates` | 
   `Get-CMSContentClassTemplates` *
 
 
@@ -394,17 +394,17 @@ This allows you, for example, to use the structural element List to create a lis
 
 You can also define the maximum number of pages that will be displayed in the list. You can also use keywords to find specific pages of a particular topic. To be able to assign categories and keywords, you first need to create them. Categories and keywords can be renamed or deleted.
 
-- `New-MSCategory`
+- `New-MSCategory` | 
   `New-CMSCategory` *
-- `Get-MSCategoryData`
+- `Get-MSCategoryData` | 
   `Get-CMSCategoryData` *
-- `Rename-MSCategory`
+- `Rename-MSCategory` | 
   `Rename-CMSCategory` *
-- `Get-MSProjectCategories`
+- `Get-MSProjectCategories` | 
   `Get-CMSProjectCategories` *
-- `Get-MSProjectCategoriesKeywords`
+- `Get-MSProjectCategoriesKeywords` | 
   `Get-CMSProjectCategoriesKeywords` *
-- `Remove-MSCategory`
+- `Remove-MSCategory` | 
   `Remove-CMSCategory` *
 
 
@@ -417,19 +417,19 @@ You can assign categories and keywords to the pages of a project. Categories are
 
 This allows you, for example, to use the structural element List to create a list of links to pages that all contain the same keyword.  You can also define the maximum number of pages that will be displayed in the list. You can also use keywords to find specific pages of a particular topic. To be able to assign categories and keywords, you first need to create them. Categories and keywords can be renamed or deleted.
 
-- `New-MSKeywords`
+- `New-MSKeywords` | 
   `New-CMSKeywords` *
-- `Get-MSKeywordData`
+- `Get-MSKeywordData` | 
   `Get-CMSKeywordData` *
-- `Get-MSCategoryKeywords`
+- `Get-MSCategoryKeywords` | 
   `Get-CMSCategoryKeywords` *
-- `Get-MSProjectKeywords`
+- `Get-MSProjectKeywords` | 
   `Get-CMSProjectKeywords` *
-- `Remove-MSKeyword`
+- `Remove-MSKeyword` | 
   `Remove-CMSKeyword` *
-- `Rename-MSKeyword`
+- `Rename-MSKeyword` | 
   `Rename-CMSKeyword` *
-- `Set-MSKeywordAssignment`
+- `Set-MSKeywordAssignment` | 
   `Set-CMSKeywordAssignment` *
 
 
