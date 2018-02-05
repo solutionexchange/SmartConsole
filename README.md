@@ -42,7 +42,7 @@ SerializationVersion           1.1.0.1
 PS: \> 
 ```
 
-The desktop edition is necessary. For current limitations, please read the [KNOWNISSUES.md](Wiki\KNOWNISSUES.md) document.
+The desktop edition is necessary. For current limitations, please read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document.
 
 
 
