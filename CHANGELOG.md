@@ -25,7 +25,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 ### Test, Build and Packaging Improvements
 
-- Fix module version number to `0.2.0` for this release. ([#2](/issues/2))
+- Fix module version number to `0.2.0` for this release. ([#2](https://github.com/solutionexchange/SmartConsole/issues/2))
 
 
 
@@ -34,7 +34,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 ### Documentation, Graphics and Help Content
 
 - Update `OVERVIEW.md`
-- Fix link issue in `README.md`  ([#1](/issues/1))
+- Fix link issue in `README.md`  ([#1](https://github.com/solutionexchange/SmartConsole/issues/1))
 
 
 
