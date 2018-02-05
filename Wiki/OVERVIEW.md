@@ -282,6 +282,8 @@ You can create, rename, copy, export, import, and delete projects.
   `Enter-CMSProject` *
 - `Get-MSProjectData` | 
   `Get-CMSProjectData` *
+- `Get-MSAllProjects` | 
+  `Get-CMSAllProjects` *
 
 
 

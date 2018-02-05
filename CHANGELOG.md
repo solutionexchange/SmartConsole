@@ -4,6 +4,69 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
+## v0.2.0 - 2018-02-05
+
+### New Features
+
+- Add new function `Get-MSAllProjects`
+- New script `Get-AllProjects.ps1` with `| Format-List` or `| Format-Table` support.
+
+
+
+
+
+### Breaking changes
+
+- Read the [BREAKINGCHANGES.md](Wiki/BREAKINGCHANGES.md) document for more information.
+
+
+
+
+
+### Test, Build and Packaging Improvements
+
+- Fix module version number to `0.2.0` for this release. ([#2](/issues/2))
+
+
+
+
+
+### Documentation, Graphics and Help Content
+
+- Update `OVERVIEW.md`
+- Fix link issue in `README.md`  ([#1](/issues/1))
+
+
+
+
+
+### Overview
+
+- Read the [OVERVIEW.md](Wiki/OVERVIEW.md) document for more information.
+
+
+
+
+
+### FAQ
+
+- Read the [FAQ.md](Wiki/FAQ.md) document for more information.
+
+
+
+
+
+### Known Issues
+
+- Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
+
+
+
+
+------
+
+
+
 ## v0.1.9 - 2018-02-01
 
 
@@ -49,6 +112,8 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 ### Known Issues
 
 - Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
+
+
 
 
 ------
