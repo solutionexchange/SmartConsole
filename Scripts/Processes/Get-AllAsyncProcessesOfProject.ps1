@@ -13,10 +13,10 @@ $AsyncQueueProcessList1 = ($AsyncQueueProcessList).SelectNodes("IODATA/PROCESSLI
 $AsyncQueueProcessList2 = ($AsyncQueueProcessList).SelectNodes("IODATA/PROCESSLIST2/ASYNCQUEUE");
 
 Write-Output ("`r`nProcessList (1) > Running:`r`n");
-$AsyncQueueProcessList1 | Select-Object -Property ("guid", "name", "projectname", "jobguid", "servername", "lastexecute");
+$AsyncQueueProcessList1 | Select-Object -Property ("guid", "automatic", "priority", "active", "name", "projectname", "jobguid", "servername", "lastexecute");
 
 Write-Output ("`r`nProcessList (2) > Waiting:`r`n");
-$AsyncQueueProcessList2 | Select-Object -Property ("guid", "name", "projectname", "jobguid", "servername", "lastexecute");
+$AsyncQueueProcessList2 | Select-Object -Property ("guid", "automatic", "priority", "active", "name", "projectname", "jobguid", "servername", "lastexecute");
 
 Write-Output ("`r`n");
 Write-Output ("Total Processes currently running for Project: {0}" -f $AsyncQueueProcessList1.Count);

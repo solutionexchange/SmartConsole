@@ -11,7 +11,7 @@ Enter-MSSession -UseDefaults ($true);
 $AsyncQueueProcessList1 = (Get-MSAsyncQueueProcessList -ProjectGUID ($WSMProjectGUID)).SelectNodes("IODATA/PROCESSLIST1/ASYNCQUEUE");
 
 Write-Output ("`r`nProcessList (1) > Running:`r`n");
-$AsyncQueueProcessList1 | Select-Object -Property ("guid", "name", "projectname", "jobguid", "servername", "lastexecute");
+$AsyncQueueProcessList1 | Select-Object -Property ("guid", "automatic", "priority", "active", "name", "projectname", "jobguid", "servername", "lastexecute");
 
 Write-Output ("`r`n");
 Write-Output ("Total Processes currently running for Project: {0}`r`n" -f $AsyncQueueProcessList1.Count);

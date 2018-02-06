@@ -9,20 +9,14 @@ Enter-MSSession -UseDefaults ($true);
 $AllApplicationServers = (Get-MSAllApplicationServers).SelectNodes("IODATA/EDITORIALSERVERS/EDITORIALSERVER");
 $AllLoggedOnUsers = (Get-MSAllLoggedOnUsers).SelectNodes("IODATA/USERS/USER");
 
-Write-Output ("`r`n");
+($AllLoggedOnUsers | Where-Object {$_.loginguid -eq (Get-MSSessionProperty -Name ("LoginGUID"))}).name += " *";
+$AllLoggedOnUsers | ForEach-Object {$_.SetAttribute("servername", ($AllApplicationServers | Where-Object -Property "guid" -EQ -Value $_.serverguid).name)};
 
-foreach ($LoggedOnUser in $AllLoggedOnUsers) {
-    if ($LoggedOnUser.loginguid -eq (Get-MSSessionProperty -Name ("LoginGUID"))) {
-        $CurrentSession = (" *");
-    }
-    else {
-        $CurrentSession = ("");
-    }
-    Write-Output ("At {1} is {3} as User {0}{2}" -f $LoggedOnUser.name, ($AllApplicationServers | Where-Object {$_.guid -eq $LoggedOnUser.serverguid}).name, $CurrentSession, $LoggedOnUser.loginguid);
-}
+Write-Output ("`r`n");
+$AllLoggedOnUsers | Select-Object -Property ("servername", "lastactiondate", "loginguid", "name") | Sort-Object -Property "name";
 
 Write-Output ("`r`n* This is your current session.`r`n");
-Write-Output ("Currently logged on: {0}`r`n" -f $AllLoggedOnUsers.Count);
+Write-Output ("Total Users logged on: {0}`r`n" -f $AllLoggedOnUsers.Count);
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);
