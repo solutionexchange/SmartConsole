@@ -34,7 +34,7 @@ Function Get-MSContentClasses {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><TEMPLATES folderguid='[!guid_folder!]' action='list'/></IODATA>");
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><TEMPLATES folderguid='[!guid_folder!]' action='list'/></IODATA>");
         if ($ContentClassFolderGUID) {
             $Request = $Request.Replace("[!guid_folder!]", ($ContentClassFolderGUID|ConvertTo-RQLGuid));
         }

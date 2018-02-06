@@ -24,7 +24,7 @@ Function Get-MSProjectKeywords {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PROJECT><CATEGORY><KEYWORDS action='list'/></CATEGORY></PROJECT></IODATA>");
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PROJECT><CATEGORY><KEYWORDS action='list'/></CATEGORY></PROJECT></IODATA>");
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
         return $Response;

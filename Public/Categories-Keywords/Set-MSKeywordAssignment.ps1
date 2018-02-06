@@ -61,7 +61,7 @@ Function Set-MSKeywordAssignment {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_Login!]' sessionkey='[!key!]'><PROJECT sessionkey='[!key!]'><REQUESTBODY/></PROJECT></IODATA>");
+        $Request = ("<IODATA loginguid='[!guid_Login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PROJECT sessionkey='[!key!]'><REQUESTBODY/></PROJECT></IODATA>");
         $RequestBody = ("");
         if ($Action) {
             if ($PageGUID) {

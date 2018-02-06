@@ -40,7 +40,7 @@ Function Get-MSContentClassAllProperties {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PROJECT><TEMPLATE action='load' guid='[!guid_template!]'><ELEMENTS childnodesasattributes='1' action='load'/><TEMPLATEVARIANTS action='list'/></TEMPLATE></PROJECT></IODATA>").Replace("[!guid_template!]", ($ContentClassGUID|ConvertTo-RQLGuid));
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PROJECT><TEMPLATE action='load' guid='[!guid_template!]'><ELEMENTS childnodesasattributes='1' action='load'/><TEMPLATEVARIANTS action='list'/></TEMPLATE></PROJECT></IODATA>").Replace("[!guid_template!]", ($ContentClassGUID|ConvertTo-RQLGuid));
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
         return $Response;

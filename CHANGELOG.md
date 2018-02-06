@@ -4,6 +4,59 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
+## v0.2.4 - 2018-02-06
+
+### Breaking changes
+
+- Read the [BREAKINGCHANGES.md](Wiki/BREAKINGCHANGES.md) document for more information.
+
+
+
+
+
+### Engine updates and fixes
+
+- Added to all RQL-Queries  `dialoglanguageid='[!dialog_language_id!]'`.
+
+
+
+
+
+### General cmdlet updates and fixes
+
+- Added the `| ConvertFrom-OADate` function to all date issues.
+
+
+
+
+
+### Overview
+
+- Read the [OVERVIEW.md](Wiki/OVERVIEW.md) document for more information.
+
+
+
+
+
+### FAQ
+
+- Read the [FAQ.md](Wiki/FAQ.md) document for more information.
+
+
+
+
+
+### Known Issues
+
+- Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
+
+
+
+
+------
+
+
+
 ## v0.2.3 - 2018-02-06
 
 ### Breaking changes

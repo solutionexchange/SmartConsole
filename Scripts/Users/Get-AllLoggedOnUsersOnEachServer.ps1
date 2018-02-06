@@ -11,6 +11,7 @@ $AllLoggedOnUsers = (Get-MSAllLoggedOnUsers).SelectNodes("IODATA/USERS/USER");
 
 ($AllLoggedOnUsers | Where-Object {$_.loginguid -eq (Get-MSSessionProperty -Name ("LoginGUID"))}).name += " *";
 $AllLoggedOnUsers | ForEach-Object {$_.SetAttribute("servername", ($AllApplicationServers | Where-Object -Property "guid" -EQ -Value $_.serverguid).name)};
+$AllLoggedOnUsers | ForEach-Object {$_.SetAttribute("lastactiondate", (Get-Date -Date ($_.lastactiondate|ConvertFrom-OADate) -Format ("dd.MM.yyyy HH:mm:ss")))};
 
 Write-Output ("`r`n");
 $AllLoggedOnUsers | Select-Object -Property ("servername", "lastactiondate", "loginguid", "name") | Sort-Object -Property "servername";

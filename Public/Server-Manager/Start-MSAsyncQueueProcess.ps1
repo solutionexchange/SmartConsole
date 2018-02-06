@@ -32,7 +32,7 @@ Function Start-MSAsyncQueueProcess {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><ADMINISTRATION><ASYNCQUEUE action='save' guid='[!guid_process!]' nextaction='start'/></ADMINISTRATION></IODATA>").Replace("[!guid_process!]", ($ProcessGUID|ConvertTo-RQLGuid));
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><ADMINISTRATION><ASYNCQUEUE action='save' guid='[!guid_process!]' nextaction='start'/></ADMINISTRATION></IODATA>").Replace("[!guid_process!]", ($ProcessGUID|ConvertTo-RQLGuid));
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
         return $Response;

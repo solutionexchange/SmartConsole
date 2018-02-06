@@ -42,7 +42,7 @@ Function Get-MSProjectData {
         if (-not $ProjectGUID) {
             $ProjectGUID = Get-MSSessionProperty -Name ("ProjectGUID");
         }
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><ADMINISTRATION><PROJECT action='load' guid='[!guid_project!]'/></ADMINISTRATION></IODATA>").Replace("[!guid_project!]", ($ProjectGUID|ConvertTo-RQLGuid));
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><ADMINISTRATION><PROJECT action='load' guid='[!guid_project!]'/></ADMINISTRATION></IODATA>").Replace("[!guid_project!]", ($ProjectGUID|ConvertTo-RQLGuid));
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
         return $Response;

@@ -50,7 +50,7 @@ Function Remove-MSKeyword {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PROJECT><KEYWORD action='delete' guid='[!guid_keyword!]' force='[!value_force!]' password='[!value_password!]' /></PROJECT></IODATA>").Replace("[!guid_keyword!]", ($KeywordGUID|ConvertTo-RQLGuid));
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PROJECT><KEYWORD action='delete' guid='[!guid_keyword!]' force='[!value_force!]' password='[!value_password!]' /></PROJECT></IODATA>").Replace("[!guid_keyword!]", ($KeywordGUID|ConvertTo-RQLGuid));
         if ($Force) {
             $Request = $Request.Replace("[!value_force!]", "1");
         }

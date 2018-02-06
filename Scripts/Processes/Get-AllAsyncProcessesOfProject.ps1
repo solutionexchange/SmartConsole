@@ -11,6 +11,8 @@ Enter-MSSession -UseDefaults ($true);
 $AsyncQueueProcessList = Get-MSAsyncQueueProcessList -ProjectGUID ($WSMProjectGUID);
 $AsyncQueueProcessList1 = ($AsyncQueueProcessList).SelectNodes("IODATA/PROCESSLIST1/ASYNCQUEUE");
 $AsyncQueueProcessList2 = ($AsyncQueueProcessList).SelectNodes("IODATA/PROCESSLIST2/ASYNCQUEUE");
+$AsyncQueueProcessList1 | ForEach-Object {$_.SetAttribute("lastexecute", (Get-Date -Date ($_.lastexecute|ConvertFrom-OADate) -Format ("dd.MM.yyyy HH:mm:ss")))};
+$AsyncQueueProcessList2 | ForEach-Object {$_.SetAttribute("lastexecute", (Get-Date -Date ($_.lastexecute|ConvertFrom-OADate) -Format ("dd.MM.yyyy HH:mm:ss")))};
 
 Write-Output ("`r`nProcessList (1) > Running:`r`n");
 $AsyncQueueProcessList1 | Select-Object -Property ("guid", "automatic", "priority", "active", "name", "projectname", "jobguid", "servername", "lastexecute");

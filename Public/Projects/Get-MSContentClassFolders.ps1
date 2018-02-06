@@ -26,7 +26,7 @@ Function Get-MSContentClassFolders {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><TEMPLATEGROUPS action='load' checktemplateright='1' /></IODATA>");
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><TEMPLATEGROUPS action='load' checktemplateright='1' /></IODATA>");
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
         return $Response;

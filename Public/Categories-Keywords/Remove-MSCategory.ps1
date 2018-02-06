@@ -50,7 +50,7 @@ Function Remove-MSCategory {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PROJECT><CATEGORY action='delete' guid='[!guid_category!]' force='[!value_force!]' password='[!value_password!]' /></PROJECT></IODATA>").Replace("[!guid_category!]", ($CategoryGUID|ConvertTo-RQLGuid));
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PROJECT><CATEGORY action='delete' guid='[!guid_category!]' force='[!value_force!]' password='[!value_password!]' /></PROJECT></IODATA>").Replace("[!guid_category!]", ($CategoryGUID|ConvertTo-RQLGuid));
         if ($Force) {
             $Request = $Request.Replace("[!value_force!]", "1");
         }

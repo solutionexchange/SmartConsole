@@ -39,7 +39,7 @@ Function Rename-MSCategory {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PROJECT><CATEGORY action='save' guid='[!guid_category!]' value='[!value!]'/></PROJECT></IODATA>").Replace("[!guid_category!]", ($CategoryGUID|ConvertTo-RQLGuid)).Replace("[!value!]", $CategoryName);
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PROJECT><CATEGORY action='save' guid='[!guid_category!]' value='[!value!]'/></PROJECT></IODATA>").Replace("[!guid_category!]", ($CategoryGUID|ConvertTo-RQLGuid)).Replace("[!value!]", $CategoryName);
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
         return $Response;

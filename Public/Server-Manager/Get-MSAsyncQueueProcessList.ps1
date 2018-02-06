@@ -44,10 +44,10 @@ Function Get-MSAsyncQueueProcessList {
             $ProjectGUID = Get-MSSessionProperty -Name ("ProjectGUID");
         } 
         if ($ProjectGUID) {
-            $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><ADMINISTRATION><ASYNCQUEUE action='list' project='[!guid_project!]'/></ADMINISTRATION></IODATA>").Replace("[!guid_project!]", ($ProjectGUID|ConvertTo-RQLGuid));
+            $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><ADMINISTRATION><ASYNCQUEUE action='list' project='[!guid_project!]'/></ADMINISTRATION></IODATA>").Replace("[!guid_project!]", ($ProjectGUID|ConvertTo-RQLGuid));
         }
         else {
-            $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><ADMINISTRATION><ASYNCQUEUE action='list'/></ADMINISTRATION></IODATA>");
+            $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><ADMINISTRATION><ASYNCQUEUE action='list'/></ADMINISTRATION></IODATA>");
         }
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);

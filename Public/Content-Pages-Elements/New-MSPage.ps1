@@ -49,7 +49,7 @@ Function New-MSPage {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PAGE action='addnew' templateguid='[!guid_template!]' headline='[!headline_page!]'/></IODATA>").Replace("[!guid_template!]", ($ContentClassGUID|ConvertTo-RQLGuid)).Replace("[!headline_page!]", $HeadlinePage);
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PAGE action='addnew' templateguid='[!guid_template!]' headline='[!headline_page!]'/></IODATA>").Replace("[!guid_template!]", ($ContentClassGUID|ConvertTo-RQLGuid)).Replace("[!headline_page!]", $HeadlinePage);
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
         return $Response;

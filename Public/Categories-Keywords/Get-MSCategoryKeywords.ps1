@@ -32,7 +32,7 @@ Function Get-MSCategoryKeywords {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PROJECT><CATEGORY  guid='[!guid_category!]'><KEYWORDS action='load'/></CATEGORY></PROJECT></IODATA>").Replace("[!guid_category!]", ($CategoryGUID|ConvertTo-RQLGuid));
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PROJECT><CATEGORY  guid='[!guid_category!]'><KEYWORDS action='load'/></CATEGORY></PROJECT></IODATA>").Replace("[!guid_category!]", ($CategoryGUID|ConvertTo-RQLGuid));
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
         return $Response;

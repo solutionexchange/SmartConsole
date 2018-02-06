@@ -7,6 +7,7 @@ Select-MSSession -UseDefaults ($true);
 Enter-MSSession -UseDefaults ($true);
 
 $AsyncQueueProcessList2 = (Get-MSAsyncQueueProcessList).SelectNodes("IODATA/PROCESSLIST2/ASYNCQUEUE");
+$AsyncQueueProcessList2 | ForEach-Object {$_.SetAttribute("lastexecute", (Get-Date -Date ($_.lastexecute|ConvertFrom-OADate) -Format ("dd.MM.yyyy HH:mm:ss")))};
 
 Write-Output ("`r`nProcessList (2) > Waiting:`r`n");
 $AsyncQueueProcessList2 | Select-Object -Property ("guid", "automatic", "priority", "active", "name", "projectname", "jobguid", "servername", "lastexecute");

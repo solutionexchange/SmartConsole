@@ -35,7 +35,7 @@ Function Get-MSKeywordData {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
         Set-MSSessionProperty -Name ("KeywordGUID") -Value ($KeywordGUID);
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PROJECT><CATEGORY><KEYWORD action='load' guid='[!guid_keyword!]'/></CATEGORY></PROJECT></IODATA>").Replace("[!guid_keyword!]", ($KeywordGUID|ConvertTo-RQLGuid));
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PROJECT><CATEGORY><KEYWORD action='load' guid='[!guid_keyword!]'/></CATEGORY></PROJECT></IODATA>").Replace("[!guid_keyword!]", ($KeywordGUID|ConvertTo-RQLGuid));
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
         return $Response;

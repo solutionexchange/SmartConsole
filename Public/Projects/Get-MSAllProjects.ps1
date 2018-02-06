@@ -47,7 +47,7 @@ Function Get-MSAllProjects {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><ADMINISTRATION><PROJECTS action='list' extendedinfo='[!extendet_info!]' userguid='[!guid_user!]' /></ADMINISTRATION></IODATA>");
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><ADMINISTRATION><PROJECTS action='list' extendedinfo='[!extendet_info!]' userguid='[!guid_user!]' /></ADMINISTRATION></IODATA>");
         if ($ExtendedInfo) {
             $Request = $Request.Replace("[!extendet_info!]","1");
         } else {

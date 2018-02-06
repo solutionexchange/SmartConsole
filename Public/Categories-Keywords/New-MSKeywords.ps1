@@ -46,7 +46,7 @@ Function New-MSKeywords {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PROJECT><REQUESTBODY/></PROJECT></IODATA>");
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PROJECT><REQUESTBODY/></PROJECT></IODATA>");
         if ($CategoryGUID) {
             $RequestBody = ("<CATEGORY guid='[!guid_category!]'>").Replace("[!guid_category!]", ($CategoryGUID|ConvertTo-RQLGuid));
             foreach ($Keyword in $Keywords) {
