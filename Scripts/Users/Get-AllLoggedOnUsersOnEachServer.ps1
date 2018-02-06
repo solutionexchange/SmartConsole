@@ -20,6 +20,6 @@ Write-Output ("Total Users logged on: {0}`r`n" -f $AllLoggedOnUsers.Count);
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);
-Unregister-MSSession -UseDefaults ($true);  
+Unregister-MSSession -UseDefaults ($true);
 
 Unregister-MSConfigStore;
