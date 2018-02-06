@@ -4,6 +4,61 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
+## v0.2.3 - 2018-02-06
+
+### Breaking changes
+
+- Read the [BREAKINGCHANGES.md](Wiki/BREAKINGCHANGES.md) document for more information.
+
+
+
+
+
+### General cmdlet updates and fixes
+
+- Revision of all scripts for performance optimization.
+- Optimization of the scripts for pipeline functions like `| Format-Table` or `| Format list` etc.
+
+
+
+
+
+### Code Cleanup
+
+- Optimization of the functions for output performance.
+- Optimization of the RQL-Requests to the backend and aggregation of multiple requests within some scripts.
+
+
+
+
+
+### Overview
+
+- Read the [OVERVIEW.md](Wiki/OVERVIEW.md) document for more information.
+
+
+
+
+
+### FAQ
+
+- Read the [FAQ.md](Wiki/FAQ.md) document for more information.
+
+
+
+
+
+### Known Issues
+
+- Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
+
+
+
+
+------
+
+
+
 ## v0.2.2 - 2018-02-06
 
 ### New Features
@@ -34,7 +89,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 ### General cmdlet updates and fixes
 
 - Revision of all scripts to the adapted functionality.
-- Optimization of the scripts for pipeline functions z.b. `| Format-Table` or `| Format list` etc.
+- Optimization of the scripts for pipeline functions like `| Format-Table` or `| Format list` etc.
 
 
 
