@@ -4,6 +4,6 @@
     <sessionname>Default</sessionname>
     <username>Admin</username>
     <uri>https://localhost/CMS/WebService/RqlWebService.svc?WSDL</uri>
-    <projectguid>7C503F8E943E4E6CACE63B2DEB82BBF4</projectguid>
+    <projectguid>...</projectguid>
   </defaults>
 </configuration>
