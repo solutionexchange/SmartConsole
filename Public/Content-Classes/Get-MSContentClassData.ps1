@@ -44,6 +44,7 @@ Function Get-MSContentClassData {
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PROJECT><TEMPLATE action='load' guid='[!guid_template!]'/></PROJECT></IODATA>").Replace("[!guid_template!]", ($ContentClassGUID|ConvertTo-RQLGuid));
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
+        return $Response;
         Show-MSSessionWebServiceDebug;
     }
     end {

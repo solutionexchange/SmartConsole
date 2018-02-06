@@ -37,6 +37,7 @@ Function Get-MSAsyncQueueProcess {
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><ADMINISTRATION><ASYNCQUEUE action='load' guid='[!guid_process!]'/></ADMINISTRATION></IODATA>").Replace("[!guid_process!]", ($ProcessGUID|ConvertTo-RQLGuid));
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
+        return $Response;
         Show-MSSessionWebServiceDebug;
     }
     end {

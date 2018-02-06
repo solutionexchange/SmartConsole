@@ -35,6 +35,7 @@ Function New-MSCategory {
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PROJECT><CATEGORY action='addnew' value='[!value!]'/></PROJECT></IODATA>").Replace("[!value!]", $CategoryName);
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
+        return $Response;
         Show-MSSessionWebServiceDebug;
     }
     end {

@@ -29,6 +29,7 @@ Function Get-MSAllApplicationServers {
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><ADMINISTRATION><EDITORIALSERVERS action='list'/></ADMINISTRATION></IODATA>");
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
+        return $Response;
         Show-MSSessionWebServiceDebug;
     }
     end {

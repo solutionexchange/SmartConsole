@@ -29,6 +29,7 @@ Function Get-MSAllUsers {
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><ADMINISTRATION><USERS action='list'/></ADMINISTRATION></IODATA>");
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
+        return $Response;
         Show-MSSessionWebServiceDebug;
     }
     end {

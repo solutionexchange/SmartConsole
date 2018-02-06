@@ -6,9 +6,9 @@ Register-MSSession -UseDefaults ($true);
 Select-MSSession -UseDefaults ($true);
 Enter-MSSession -UseDefaults ($true);
 
-$AllProjects = (Get-MSAllProjects).SelectNodes("IODATA/PROJECTS/PROJECT");
+$AllProjectsWithExtendedInfo = (Get-MSAllProjects -ExtendedInfo ($true)).SelectNodes("IODATA/PROJECTS/PROJECT");
 
-$AllProjects;
+$AllProjectsWithExtendedInfo;
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);

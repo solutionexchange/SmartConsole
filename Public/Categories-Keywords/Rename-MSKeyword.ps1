@@ -42,6 +42,7 @@ Function Rename-MSKeyword {
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PROJECT><CATEGORY><KEYWORD action='save' guid='[!guid_keyword!]' value='[!value!]'/></CATEGORY></PROJECT></IODATA>").Replace("[!guid_keyword!]", ($KeywordGUID|ConvertTo-RQLGuid)).Replace("[!value!]", $KeywordName);
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
+        return $Response;
         Show-MSSessionWebServiceDebug;
     }
     end {

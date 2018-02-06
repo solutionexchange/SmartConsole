@@ -6,7 +6,7 @@ Register-MSSession -UseDefaults ($true);
 Select-MSSession -UseDefaults ($true);
 Enter-MSSession -UseDefaults ($true);
 
-Start-MSAsyncQueueProcess -ProcessGUID ("CEC4FE2F50BB4E019AD6EED70E3FC5D2"); # Ist nur eine Beispiel GUID.
+(Start-MSAsyncQueueProcess -ProcessGUID ("6CBD4FAD3CB5493A9CB78C169CBA71AA")).SelectNodes("IODATA/ADMINISTRATION/ASYNCQUEUE");
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);

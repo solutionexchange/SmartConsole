@@ -6,11 +6,8 @@ Register-MSSession -UseDefaults ($true);
 Select-MSSession -UseDefaults ($true);
 Enter-MSSession -UseDefaults ($true);
 
-Get-MSAllApplicationServers;
-$AllApplicationServers = ([xml](Get-MSSessionProperty -Name ("LastResponse"))).SelectNodes("IODATA/EDITORIALSERVERS/EDITORIALSERVER");
-
-Get-MSAsyncQueueProcessList;
-$AsyncQueueProcessList1 = ([xml](Get-MSSessionProperty -Name ("LastResponse"))).SelectNodes("IODATA/PROCESSLIST1/ASYNCQUEUE");
+$AllApplicationServers = (Get-MSAllApplicationServers).SelectNodes("IODATA/EDITORIALSERVERS/EDITORIALSERVER");
+$AsyncQueueProcessList1 = (Get-MSAsyncQueueProcessList).SelectNodes("IODATA/PROCESSLIST1/ASYNCQUEUE");
 
 Write-Output ("`r`n");
 

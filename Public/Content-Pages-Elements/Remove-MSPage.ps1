@@ -74,6 +74,7 @@ Function Remove-MSPage {
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PAGE action='delete' forcedelete2910='[!forcedelete_2910!]' forcedelete2911='[!forcedelete_2911!]' guid='[!guid_page!]'/></IODATA>").Replace("[!guid_page!]", ($PageGUID|ConvertTo-RQLGuid)).Replace("[!forcedelete_2910!]", $ForceDelete2910Replace).Replace("[!forcedelete_2911!]", $ForceDelete2911Replace);
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
+        return $Response;
         Show-MSSessionWebServiceDebug;
     }
     end {

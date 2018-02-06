@@ -6,9 +6,10 @@ Register-MSSession -UseDefaults ($true);
 Select-MSSession -UseDefaults ($true);
 Enter-MSSession -UseDefaults ($true);
 
-$AllProjects = (Get-MSAllProjects).SelectNodes("IODATA/PROJECTS/PROJECT");
+#$AllProjectsForUser = (Get-MSAllProjects -UserGUID (Get-MSSessionProperty -Name ("UserGUID"))).SelectNodes("IODATA/PROJECTS/PROJECT");
+$AllProjectsForUser = (Get-MSAllProjects -UserGUID ("78054D5AA7304EB482AF1FCC70B60C11")).SelectNodes("IODATA/PROJECTS/PROJECT");
 
-$AllProjects;
+$AllProjectsForUser;
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);

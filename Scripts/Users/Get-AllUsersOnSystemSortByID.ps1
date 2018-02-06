@@ -6,11 +6,8 @@ Register-MSSession -UseDefaults ($true);
 Select-MSSession -UseDefaults ($true);
 Enter-MSSession -UseDefaults ($true);
 
-Get-MSAllUsers;
-$AllUsers = (([xml](Get-MSSessionProperty -Name ("LastResponse"))).SelectNodes("IODATA/USERS/USER")) | Sort-Object -Culture ("de-DE") -Property @{Expression = {$_.id -as [int]}};
-
-Get-MSAllLoggedOnUsers;
-$AllLoggedOnUsers = ([xml](Get-MSSessionProperty -Name ("LastResponse"))).SelectNodes("IODATA/USERS/USER");
+$AllUsers = ((Get-MSAllUsers).SelectNodes("IODATA/USERS/USER")) | Sort-Object -Culture ("de-DE") -Property @{Expression = {$_.id -as [int]}};
+$AllLoggedOnUsers = (Get-MSAllLoggedOnUsers).SelectNodes("IODATA/USERS/USER");
 
 Write-Output ("`r`n");
 

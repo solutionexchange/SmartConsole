@@ -6,11 +6,8 @@ Register-MSSession -UseDefaults ($true);
 Select-MSSession -UseDefaults ($true);
 Enter-MSSession -UseDefaults ($true);
 
-Get-MSAllApplicationServers;
-$AllApplicationServers = ([xml](Get-MSSessionProperty -Name ("LastResponse"))).SelectNodes("IODATA/EDITORIALSERVERS/EDITORIALSERVER");
-
-Get-MSAllLoggedOnUsers;
-$AllLoggedOnUsers = ([xml](Get-MSSessionProperty -Name ("LastResponse"))).SelectNodes("IODATA/USERS/USER");
+$AllApplicationServers = (Get-MSAllApplicationServers).SelectNodes("IODATA/EDITORIALSERVERS/EDITORIALSERVER");
+$AllLoggedOnUsers = (Get-MSAllLoggedOnUsers).SelectNodes("IODATA/USERS/USER");
 
 Write-Output ("`r`n");
 

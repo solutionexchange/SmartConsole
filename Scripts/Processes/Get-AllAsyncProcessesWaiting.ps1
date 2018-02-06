@@ -6,8 +6,7 @@ Register-MSSession -UseDefaults ($true);
 Select-MSSession -UseDefaults ($true);
 Enter-MSSession -UseDefaults ($true);
 
-Get-MSAsyncQueueProcessList;
-$AsyncQueueProcessList2 = ([xml](Get-MSSessionProperty -Name ("LastResponse"))).SelectNodes("IODATA/PROCESSLIST2/ASYNCQUEUE");
+$AsyncQueueProcessList2 = (Get-MSAsyncQueueProcessList).SelectNodes("IODATA/PROCESSLIST2/ASYNCQUEUE");
 
 Write-Output ("`r`nProcessList (2) > Waiting:`r`n--------------");
 

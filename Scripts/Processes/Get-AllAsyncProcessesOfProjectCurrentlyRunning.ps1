@@ -8,14 +8,10 @@ Register-MSSession -UseDefaults ($true);
 Select-MSSession -UseDefaults ($true);
 Enter-MSSession -UseDefaults ($true);
 
-Get-MSAsyncQueueProcessList -ProjectGUID ($WSMProjectGUID);
-$AsyncQueueProcessList1 = ([xml](Get-MSSessionProperty -Name ("LastResponse"))).SelectNodes("IODATA/PROCESSLIST1/ASYNCQUEUE");
+$AsyncQueueProcessList1 = (Get-MSAsyncQueueProcessList -ProjectGUID ($WSMProjectGUID)).SelectNodes("IODATA/PROCESSLIST1/ASYNCQUEUE");
 
-Write-Output ("`r`nProcessList (1) > Running:`r`n--------------");
-
-foreach ($Process in $AsyncQueueProcessList1) {
-    Write-Output ("Process {0}`r`n - name: {1}`r`n - project: {2}`r`n - jobguid: {3}`r`n - servername: {4}`r`n - lastexecute: {5}`r`n" -f $Process.guid, $Process.name, $Process.projectname, $Process.jobguid, $Process.servername, ($Process.lastexecute|ConvertFrom-OADate));
-}
+Write-Output ("`r`nProcessList (1) > Running:`r`n");
+$AsyncQueueProcessList1 | Select-Object -Property ("guid", "name", "projectname", "jobguid", "servername", "lastexecute");
 
 Write-Output ("`r`n");
 Write-Output ("Total Processes currently running for Project: {0}`r`n" -f $AsyncQueueProcessList1.Count);

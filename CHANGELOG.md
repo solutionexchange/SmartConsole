@@ -4,7 +4,86 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
-## v0.2.1 - 2018-02-05
+## v0.2.2 - 2018-02-06
+
+### New Features
+
+- New script `Get-AllProjectsExtendedInfo.ps1` with `| Format-List` or `| Format-Table` support.
+- New script `Get-AllProjectsForUser.ps1` with `| Format-List` or `| Format-Table` support.
+
+
+
+
+
+### Breaking changes
+
+- Read the [BREAKINGCHANGES.md](Wiki/BREAKINGCHANGES.md) document for more information.
+
+
+
+
+
+### Engine updates and fixes
+
+- Revision of the way how to get return values.
+
+
+
+
+
+### General cmdlet updates and fixes
+
+- Revision of all scripts to the adapted functionality.
+- Optimization of the scripts for pipeline functions z.b. `| Format-Table` or `| Format list` etc.
+
+
+
+
+
+### Code Cleanup
+
+- Optimization of queries for speed.
+
+
+
+
+
+### Documentation, Graphics and Help Content
+
+- Updated `OVERVIEW.md` with the new scripts.
+
+
+
+
+
+### Overview
+
+- Read the [OVERVIEW.md](Wiki/OVERVIEW.md) document for more information.
+
+
+
+
+
+### FAQ
+
+- Read the [FAQ.md](Wiki/FAQ.md) document for more information.
+
+
+
+
+
+### Known Issues
+
+- Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
+
+
+
+
+------
+
+
+
+## v0.2.1- 2018-02-05
 
 ### Breaking changes
 

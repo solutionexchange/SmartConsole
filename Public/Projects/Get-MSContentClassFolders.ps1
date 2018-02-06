@@ -29,6 +29,7 @@ Function Get-MSContentClassFolders {
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><TEMPLATEGROUPS action='load' checktemplateright='1' /></IODATA>");
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
+        return $Response;
         Show-MSSessionWebServiceDebug;
     }
     end {

@@ -52,6 +52,7 @@ Function New-MSPage {
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]'><PAGE action='addnew' templateguid='[!guid_template!]' headline='[!headline_page!]'/></IODATA>").Replace("[!guid_template!]", ($ContentClassGUID|ConvertTo-RQLGuid)).Replace("[!headline_page!]", $HeadlinePage);
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
+        return $Response;
         Show-MSSessionWebServiceDebug;
     }
     end {
