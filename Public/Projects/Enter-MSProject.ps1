@@ -36,8 +36,8 @@ Function Enter-MSProject {
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><ADMINISTRATION action='validate' guid='[!guid_login!]' useragent='script'><PROJECT guid='[!guid_project!]'/></ADMINISTRATION></IODATA>");
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
-        return $Response;
         Show-MSSessionWebServiceDebug;
+        return $Response;
     }
     end {
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);

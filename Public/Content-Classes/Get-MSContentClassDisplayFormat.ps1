@@ -38,8 +38,8 @@ Function Get-MSContentClassDisplayFormat {
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PROJECT><TEMPLATE guid='[!guid_template!]'><TEMPLATEVARIANTS action='loadfirst' /></TEMPLATE></PROJECT></IODATA>").Replace("[!guid_template!]", ($ContentClassGUID|ConvertTo-RQLGuid));
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
-        return $Response;
         Show-MSSessionWebServiceDebug;
+        return $Response;
     }
     end {
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);

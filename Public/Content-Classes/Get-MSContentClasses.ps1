@@ -43,8 +43,8 @@ Function Get-MSContentClasses {
         }
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
-        return $Response;
         Show-MSSessionWebServiceDebug;
+        return $Response;
     }
     end {
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);

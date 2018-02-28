@@ -46,8 +46,8 @@ Function Find-MSSpecialPages {
         $Request = ("<IODATA loginguid='[!guid_Login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PAGE action='xsearch' orderby='changedate' pagesize='[!resultsize!]'><SEARCHITEMS><SEARCHITEM key='specialpages' value='[!pagetype!]' operator='eq' displayvalue=''/></SEARCHITEMS></PAGE></IODATA>").Replace("[!pagetype!]", $PageType).Replace("[!resultsize!]", $ResultSize);
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
-        return $Response;
         Show-MSSessionWebServiceDebug;
+        return $Response;
     }
     end {
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);
