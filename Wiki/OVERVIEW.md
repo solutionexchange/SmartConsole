@@ -257,6 +257,8 @@ Enables you to administer the user data for one or more projects.
 
 - `Get-MSUserOfProject` | 
   `Get-CMSUserOfProject` *
+- `Get-MSUserRoleOfProject` | 
+  `Get-CMSUserRoleOfProject` *
 
 
 
