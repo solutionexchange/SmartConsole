@@ -36,8 +36,8 @@ Function Get-MSPagePreview {
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PREVIEW projectguid='[!guid_project!]' loginguid='[!guid_login!]' url='/CMS/ioRD.asp' querystring='Action=Preview&amp;Pageguid=[!guid_page!]' /></IODATA>").Replace("[!guid_page!]", ($PageGUID|ConvertTo-RQLGuid));
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
-        return $Response;
         Show-MSSessionWebServiceDebug;
+        return $Response;
     }
     end {
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);
