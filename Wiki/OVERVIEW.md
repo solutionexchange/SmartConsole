@@ -447,6 +447,32 @@ This allows you, for example, to use the structural element List to create a lis
 
 
 
+#### Publication
+
+The "Publication/Export" section describes RQL queries that you use to administer the publication and subsequent export of projects and pages.
+
+The following topics are covered:
+
+
+
+##### Publication Packages
+
+This section deals with queries involving publication packages. A publication package consists of several publication settings, one for each combination of language variant and project variant. Each publication setting defines where the content of a folder and the generated pages will be published. To do so, you can assign a publication folder to each folder and the virtual folder of generated pages. You can also assign several publication targets to each publication setting. The publishing process then includes all the publication targets.
+
+The publication package on the project node provides the publication settings for the start page and, at the same time, serves as the default setting for all links that do not have their own publication packages.
+
+- `Get-MSProjectPublicationPackages` | 
+  `Get-CMSProjectPublicationPackages` *
+- `Get-MSPublicationPackageReferenceList` | 
+  `Get-MSPublicationPackageReferenceList` *
+
+
+
+
+------
+
+
+
 ## Scripts
 
 `..\Scripts\`

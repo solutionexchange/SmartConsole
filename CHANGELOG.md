@@ -4,6 +4,48 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
+## v0.2.6 - 2018-03-19
+
+### New Features
+
+- New script `Get-AllProjectPublicationPackagesWithoutReferences.ps1`
+  with `| Format-List` or `| Format-Table` support.
+- New function `Get-MSProjectPublicationPackages`.
+- New function `Get-MSPublicationPackageReferenceList`.
+
+
+
+
+
+### Breaking changes
+
+- Read the [BREAKINGCHANGES.md](Wiki/BREAKINGCHANGES.md) document for more information.
+  ​
+
+### General cmdlet updates and fixes
+
+- Fix some minor issues within the core code.
+  ​
+
+### Overview
+
+- Read the [OVERVIEW.md](Wiki/OVERVIEW.md) document for more information.
+  ​
+
+### FAQ
+
+- Read the [FAQ.md](Wiki/FAQ.md) document for more information.
+  ​
+
+### Known Issues
+
+- Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
+  ​
+
+------
+
+
+
 ## v0.2.5 - 2018-02-28
 
 ### New Features

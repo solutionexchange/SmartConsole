@@ -16,6 +16,9 @@
 @( Get-ChildItem -Path "$PSScriptRoot\Public\Content-Pages-Elements\*.ps1" ) | ForEach-Object {
     . $_.FullName
 }
+@( Get-ChildItem -Path "$PSScriptRoot\Public\Publication\*.ps1" -Recurse ) | ForEach-Object {
+    . $_.FullName
+}
 @( Get-ChildItem -Path "$PSScriptRoot\Public\Projects\*.ps1" ) | ForEach-Object {
     . $_.FullName
 }
