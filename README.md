@@ -100,3 +100,9 @@ The desktop edition is necessary. For current limitations, please read the [KNOW
 
 - After a successful login, you will get a list of all currently *logged on* user accounts of the Management Server. ;)
 
+
+
+
+## Possible Errors
+
+If the RQL-Webservice returns an error, please check the OpenText [Article ID:KB3223466](https://knowledge.opentext.com/knowledge/cs.dll/kcs/kbarticle/view/KB3223466) for more detailed information to fix it. 
