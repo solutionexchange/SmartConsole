@@ -43,7 +43,7 @@ foreach ($PublicationPackage in $AllProjectPublicatioNPackages) {
 
 Write-Progress -Activity ("Finished...") -PercentComplete ($ValuePercentComplete) -CurrentOperation ("{0}% complete" -f [math]::Round($ValuePercentComplete)) -Status ("Please wait - Sending output to console.");
 
-$PublicationPackagesNoReference;
+$PublicationPackagesNoReference; # Optional
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);

@@ -55,7 +55,7 @@ while ($UnlinkedPages.Count -gt 0) {
 
 Write-Progress -Activity ("Finished...") -PercentComplete ($ValuePercentComplete) -CurrentOperation ("{0}% complete" -f [math]::Round($ValuePercentComplete)) -Status ("Please wait - Sending output to console.");
 
-$RemovedUnlinkedPages | Select-Object -Property ("guid", "id", "headline", "status", "flags") | Format-Table;
+$RemovedUnlinkedPages | Select-Object -Property ("guid", "id", "headline", "status", "flags") | Format-Table; # Optional
 Write-Host ("`r`nRemoved {0} unlinked pages in total." -f $Counter);
 
 #Show-MSSession; # Optional
