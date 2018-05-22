@@ -20,23 +20,39 @@ Enter-MSProject -ProjectGUID ($WSMProjectGUID) | Out-Null;
 $AllProjectVariants = (Get-MSAllProjectVariants).SelectNodes("IODATA/PROJECTVARIANTS/PROJECTVARIANT");
 $AllProjectContentClassFolders = (Get-MSContentClassFolders).SelectNodes("IODATA/TEMPLATEGROUPS/GROUP");
 
+$ResultArray =  @();
+
 foreach ($ContentClassFolder in $AllProjectContentClassFolders) {
-    Write-Output ("CK-Folder: [ {0} ]" -f ($ContentClassFolder.name));
     $AllContentClassesOfFolder = (Get-MsContentClasses -ContentClassFolderGUID ($ContentClassFolder.guid)).SelectNodes("IODATA/TEMPLATES/TEMPLATE");
     foreach ($ContentClass in $AllContentClassesOfFolder) {
+        $ResultObject = New-Object -TypeName PSCustomObject -Property @{
+            ContentClassFolder = $ContentClassFolder.name;
+            ContentClass = $ContentClass.name;
+            MissingProjectVariant = @();
+        }
+        Write-Progress -Activity ("Working... checking content class folder: {0}." -f $ContentClassFolder.name) -Status ("Please wait - check for missing project variants at content class: {0}." -f $ContentClass.name);
         $Results = ("");
         $ContentClassProjectVariants = (Get-MSContentClassProjectVariants -ContentClassGUID ($ContentClass.guid)).SelectNodes("IODATA/TEMPLATE/TEMPLATEVARIANTS/TEMPLATEVARIANT");
-        $Results = Compare-Object -ReferenceObject $AllProjectVariants.guid -DifferenceObject $ContentClassProjectVariants.projectvariantguid -PassThru;
-        if($Results) {
-            Write-Output ("   CK: {0}" -f ($ContentClass.name));
-            foreach ($Result in $Results) {
-                Write-Output ("       PV: {0} is missing" -f (($AllProjectVariants | Where-Object {$_.guid -eq $Result}).name));
+        if($ContentClassProjectVariants -ne $null) {
+            $Results = Compare-Object -ReferenceObject $AllProjectVariants.guid -DifferenceObject $ContentClassProjectVariants.projectvariantguid -PassThru;
+            if($Results) {
+                $MissingProjectVariant = @();
+                foreach ($Result in $Results) {
+                    $MissingProjectVariant += ($AllProjectVariants | Where-Object {$_.guid -eq $Result}).name;
+                }
+                $ResultObject.MissingProjectVariant = $MissingProjectVariant;
+                $ResultArray += $ResultObject;
             }
-            Write-Output ("`r`n");
+        }
+        else {
+            $MissingProjectVariant = $AllProjectVariants.name;
+            $ResultObject.MissingProjectVariant = $MissingProjectVariant;
+            $ResultArray += $ResultObject;
         }
     }
-    Write-Output ("`r`n");
 }
+
+$ResultArray | Format-Table;
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);
