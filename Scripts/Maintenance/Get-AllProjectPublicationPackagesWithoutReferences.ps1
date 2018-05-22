@@ -12,7 +12,7 @@ Register-MSSession -UseDefaults ($true);
 Select-MSSession -UseDefaults ($true);
 Enter-MSSession -UseDefaults ($true);
 
-$Result = Enter-MSProject -ProjectGUID ($WSMProjectGUID);
+Enter-MSProject -ProjectGUID ($WSMProjectGUID) | Out-Null;
 
 #(Get-MSSessionProperty -Name ("Proxy")).Timeout; # Show Default 100000 = 100 Seconds
 (Get-MSSessionProperty -Name ("Proxy")).Timeout = 600000; # Set new value to 600000 = 600 Seconds
@@ -32,7 +32,7 @@ Write-Progress -Activity ("Working...") -PercentComplete ($ValuePercentComplete)
 
 foreach ($PublicationPackage in $AllProjectPublicatioNPackages) {
     $CounterCurrent++;
-    Write-Progress -Activity ("Working... (Please wait - checking publication package {1} of {0} | Found {2} publication package without references)" -f ($AllProjectPublicatioNPackages.guid).Count, $CounterCurrent, $CounterNotInUse) -PercentComplete ($ValuePercentComplete) -CurrentOperation ("{0}% complete" -f [math]::Round($ValuePercentComplete)) -Status ("Please wait - determining references for publication package: {0}." -f $PublicationPackage.name);
+    Write-Progress -Activity ("Working... (Checking publication package {1} of {0} | Found {2} publication package without references)" -f ($AllProjectPublicatioNPackages.guid).Count, $CounterCurrent, $CounterNotInUse) -PercentComplete ($ValuePercentComplete) -CurrentOperation ("{0}% complete" -f [math]::Round($ValuePercentComplete)) -Status ("Please wait - determining references for publication package: {0}." -f $PublicationPackage.name);
     $AllReferences = (Get-MSPublicationPackageReferenceList -PackageGUID ($PublicationPackage.guid)).SelectNodes("IODATA/REFERENCES/REFERENCE");
     if (($AllReferences.value).Count -eq 0) {
         $PublicationPackagesNoReference += $PublicationPackage;

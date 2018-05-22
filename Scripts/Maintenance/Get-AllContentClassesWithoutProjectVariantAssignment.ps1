@@ -12,7 +12,7 @@ Register-MSSession -UseDefaults ($true);
 Select-MSSession -UseDefaults ($true);
 Enter-MSSession -UseDefaults ($true);
 
-$Result = Enter-MSProject -ProjectGUID ($WSMProjectGUID);
+Enter-MSProject -ProjectGUID ($WSMProjectGUID) | Out-Null;
 
 #(Get-MSSessionProperty -Name ("Proxy")).Timeout; # Show Default 100000 = 100 Seconds
 (Get-MSSessionProperty -Name ("Proxy")).Timeout = 600000; # Set new value to 600000 = 600 Seconds
@@ -21,7 +21,7 @@ $AllProjectVariants = (Get-MSAllProjectVariants).SelectNodes("IODATA/PROJECTVARI
 $AllProjectContentClassFolders = (Get-MSContentClassFolders).SelectNodes("IODATA/TEMPLATEGROUPS/GROUP");
 
 foreach ($ContentClassFolder in $AllProjectContentClassFolders) {
-    Write-Output ("CK-Folder: {0}" -f ($ContentClassFolder.name));
+    Write-Output ("CK-Folder: [ {0} ]" -f ($ContentClassFolder.name));
     $AllContentClassesOfFolder = (Get-MsContentClasses -ContentClassFolderGUID ($ContentClassFolder.guid)).SelectNodes("IODATA/TEMPLATES/TEMPLATE");
     foreach ($ContentClass in $AllContentClassesOfFolder) {
         $Results = ("");
