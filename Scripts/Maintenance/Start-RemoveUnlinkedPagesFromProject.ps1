@@ -35,7 +35,6 @@ while ($UnlinkedPages.Count -gt 0) {
         $Counter++;
         $Result = (Remove-MSPage -PageGUID ($UnlinkedPage.guid) -ForceDelete2910 ($true) -ForceDelete2911 ($true)).SelectNodes("IODATA").("#text");
         Write-Host ("{0} | {1} | {2} | {3} | {5} | {4}" -f ($UnlinkedPage.CREATION.date|ConvertFrom-OADate), ($UnlinkedPage.CHANGE.date|ConvertFrom-OADate), $LoopRun, $Counter, $UnlinkedPage.headline, $Result.Trim());
-        
     }
 
     $UnlinkedPages = (Find-MSSpecialPages -PageType ("unlinked") -ResultSize 10000).SelectNodes("IODATA/PAGES/PAGE");

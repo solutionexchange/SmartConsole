@@ -32,7 +32,7 @@ Function Get-MSPublicationPackageReferenceList {
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PROJECT><EXPORTPACKET guid='[!guid_exportpacket!]'><REFERENCES action='list' /></EXPORTPACKET></PROJECT></IODATA>").Replace("[!guid_exportpacket!]", ($PackageGUID|ConvertTo-RQLGuid));
+        $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PROJECT><EXPORTPACKET guid='[!guid_exportpacket!]'><REFERENCES action='list' maxrecords='10' /></EXPORTPACKET></PROJECT></IODATA>").Replace("[!guid_exportpacket!]", ($PackageGUID|ConvertTo-RQLGuid));
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
         Show-MSSessionWebServiceDebug;

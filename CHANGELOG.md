@@ -4,6 +4,52 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
+## v0.2.7 - 2018-05-22
+
+### New Features
+
+- Moved script `Get-AllProjectPublicationPackagesWithoutReferences.ps1`
+  with `| Format-List` or `| Format-Table` support to `Maintenance`.
+- New script `Get-AllContentClassesWithoutProjectVariantAssignment.ps1`.
+
+
+
+### Breaking changes	
+
+- Read the [BREAKINGCHANGES.md](Wiki/BREAKINGCHANGES.md) document for more information.
+  ​
+
+### General cmdlet updates and fixes
+
+- Fix some minor issues within the core code.
+
+- Update script `Get-AllUsersOnSystem.ps1`.
+
+- Update script `Start-RemoveUnlinkedPagesFromProject.ps1`.
+
+- Update function `Get-MSPublicationPackageReferenceList`.
+
+  
+
+### Overview
+
+- Read the [OVERVIEW.md](Wiki/OVERVIEW.md) document for more information.
+  ​
+
+### FAQ
+
+- Read the [FAQ.md](Wiki/FAQ.md) document for more information.
+  ​
+
+### Known Issues
+
+- Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
+  ​
+
+------
+
+
+
 ## v0.2.6 - 2018-03-19
 
 ### New Features
@@ -12,8 +58,6 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
   with `| Format-List` or `| Format-Table` support.
 - New function `Get-MSProjectPublicationPackages`.
 - New function `Get-MSPublicationPackageReferenceList`.
-
-
 
 
 
@@ -140,7 +184,6 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
-
 ------
 
 
@@ -192,7 +235,6 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 ### Known Issues
 
 - Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
-
 
 
 
@@ -274,7 +316,6 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
-
 ------
 
 
@@ -316,7 +357,6 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 ### Known Issues
 
 - Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
-
 
 
 
@@ -382,7 +422,6 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
-
 ------
 
 
@@ -432,7 +471,6 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 ### Known Issues
 
 - Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
-
 
 
 
@@ -510,7 +548,6 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
 
 
-
 ------
 
 
@@ -569,7 +606,6 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 ### Known Issues
 
 - Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
-
 
 
 

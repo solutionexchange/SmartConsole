@@ -10,7 +10,7 @@ $AllUsers = (Get-MSAllUsers).SelectNodes("IODATA/USERS/USER");
 $AllLoggedOnUsers = (Get-MSAllLoggedOnUsers).SelectNodes("IODATA/USERS/USER");
 
 Write-Output ("`r`n");
-$AllUsers | Select-Object -Property ("id", "name", "fullname", "email", "guid");
+$AllUsers | Select-Object -Property ("id", "name", "fullname", "flags2", "email", "guid");
 
 Write-Output ("`r`n");
 Write-Output ("Total Users logged on: {0}`r`n" -f $AllLoggedOnUsers.Count);
