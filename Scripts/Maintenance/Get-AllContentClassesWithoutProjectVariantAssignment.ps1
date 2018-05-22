@@ -53,8 +53,8 @@ foreach ($ContentClassFolder in $AllProjectContentClassFolders) {
     }
 }
 
-#$MissingProjectVariants | Format-Table; # Optional - Output to console
-$MissingProjectVariants | Out-File -FilePath ("C:\Temp\Result-MissingProjectVariants-{0}.txt" -f $WSMProjectGUID) -Encoding ("utf8") -Force; # Optional - Output to file
+$MissingProjectVariants | Format-Table; # Optional - Output to console
+#$MissingProjectVariants | Out-File -FilePath ("C:\Temp\Result-MissingProjectVariants-{0}.txt" -f $WSMProjectGUID) -Encoding ("utf8") -Force; # Optional - Output to file
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);
