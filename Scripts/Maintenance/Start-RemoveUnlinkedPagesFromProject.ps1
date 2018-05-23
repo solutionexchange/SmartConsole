@@ -56,7 +56,7 @@ while ($UnlinkedPages.Count -gt 0) {
 Write-Progress -Activity ("Finished...") -PercentComplete ($ValuePercentComplete) -CurrentOperation ("{0}% complete" -f [math]::Round($ValuePercentComplete)) -Status ("Please wait - Sending output to console.");
 
 $RemovedUnlinkedPages | Select-Object -Property ("guid", "id", "headline", "status", "flags") | Format-Table; # Optional
-Write-Host ("`r`nRemoved {0} unlinked pages in total." -f $Counter);
+#$RemovedUnlinkedPages | Select-Object -Property ("guid", "id", "headline", "status", "flags") | Format-Table | Out-File -FilePath ("C:\Temp\Result-RemovedUnlinkedPages-{0}.txt" -f $WSMProjectGUID) -Encoding ("utf8") -Force; # Optional - Output to file
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);
