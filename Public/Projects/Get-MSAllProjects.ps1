@@ -49,14 +49,16 @@ Function Get-MSAllProjects {
         Set-MSTimestamp;
         $Request = ("<IODATA loginguid='[!guid_login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><ADMINISTRATION><PROJECTS action='list' extendedinfo='[!extendet_info!]' userguid='[!guid_user!]' /></ADMINISTRATION></IODATA>");
         if ($ExtendedInfo) {
-            $Request = $Request.Replace("[!extendet_info!]","1");
-        } else {
-            $Request = $Request.Replace(" extendedinfo='[!extendet_info!]'","");
+            $Request = $Request.Replace("[!extendet_info!]", "1");
+        }
+        else {
+            $Request = $Request.Replace(" extendedinfo='[!extendet_info!]'", "");
         }
         if ($UserGUID) {
-            $Request = $Request.Replace("[!guid_user!]",($UserGUID|ConvertTo-RQLGuid));
-        } else {
-            $Request = $Request.Replace(" userguid='[!guid_user!]'","");
+            $Request = $Request.Replace("[!guid_user!]", ($UserGUID|ConvertTo-RQLGuid));
+        }
+        else {
+            $Request = $Request.Replace(" userguid='[!guid_user!]'", "");
         }
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);

@@ -34,7 +34,7 @@ $UnlinkedPages = (Find-MSSpecialPages -PageType ("unlinked") -ResultSize 10000).
 while ($UnlinkedPages.Count -gt 0) {
 
     $LoopRun++;
-    $WorkingStep = (90/$UnlinkedPages.Count);
+    $WorkingStep = (90 / $UnlinkedPages.Count);
     $ValuePercentComplete = 10;
     Write-Progress -Activity ("Working...") -PercentComplete ($ValuePercentComplete) -CurrentOperation ("{0}% complete" -f [math]::Round($ValuePercentComplete)) -Status ("Please wait - Found {0} unlinked pages for Loop {1} in project {2}" -f ($UnlinkedPage.guid).Count, $LoopRun, ($ResultProject.name));
     $CountTotal += $UnlinkedPages.Count;

@@ -26,7 +26,7 @@ $ValuePercentComplete = 0;
 Write-Progress -Activity ("Working...") -PercentComplete ($ValuePercentComplete) -CurrentOperation ("{0}% complete" -f [math]::Round($ValuePercentComplete)) -Status ("Please wait - collecting data.");
 $AllProjectPublicatioNPackages = (Get-MSProjectPublicationPackages).SelectNodes("IODATA/EXPORTPACKETS/EXPORTPACKET");
 
-$WorkingStep = (95/($AllProjectPublicatioNPackages.guid).Count);
+$WorkingStep = (95 / ($AllProjectPublicatioNPackages.guid).Count);
 
 $ValuePercentComplete = 5;
 Write-Progress -Activity ("Working...") -PercentComplete ($ValuePercentComplete) -CurrentOperation ("{0}% complete" -f [math]::Round($ValuePercentComplete)) -Status ("Please wait - found {0} publication packages. Go to next step." -f ($AllProjectPublicatioNPackages.guid).Count);
