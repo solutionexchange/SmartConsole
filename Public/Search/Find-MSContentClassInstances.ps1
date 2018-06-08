@@ -64,7 +64,7 @@ Function Find-MSContentClassInstances {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
         $Request = ("<IODATA loginguid='[!guid_Login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PAGE action='xsearch' orderby='pageid' orderdirection='ASC' searchguid='[!page_searchguid!]' page='[!page!]' pagesize='[!pagesize!]' maxhits='[!maxhits!]'><SEARCHITEMS><SEARCHITEM key='contentclassguid' value='[!guid_template!]' operator='eq'/></SEARCHITEMS></PAGE></IODATA>").Replace("[!guid_template!]",$ContentClassGUID).Replace("[!pagesize!]",$PageSize).Replace("[!maxhits!]",$MaxHits);
-        If ($Page -and $SearchGUID) {
+        if ($Page -and $SearchGUID) {
             $Request = $Request.Replace("[!page_searchguid!]",$SearchGUID).Replace("[!page!]",$Page);
         } else {
             $Request = $Request.Replace(" searchguid='[!page_searchguid!]'","").Replace(" page='[!page!]'","");
