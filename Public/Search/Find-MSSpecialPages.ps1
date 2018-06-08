@@ -35,15 +35,23 @@ Function Find-MSSpecialPages {
             Mandatory = $false,
             ParameterSetName = 'byMSSession'
         )]
-        [int] $ResultSize = 100
+        [int] $ResultSize = 100,
+        # {DESCRIPTION}
+        [Parameter(
+            Position = 2,
+            Mandatory = $false,
+            ParameterSetName = 'byMSSession'
+        )]
+        [datetime] $CreateDate = (Get-Date)
     )
     begin {
         Write-Debug -Message ("[ Enter => function {0} ]" -f $MyInvocation.MyCommand);
+        $OACreateDate = $CreateDate | ConvertTo-OADate;
     }
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
         Set-MSTimestamp;
-        $Request = ("<IODATA loginguid='[!guid_Login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PAGE action='xsearch' orderby='changedate' pagesize='[!resultsize!]'><SEARCHITEMS><SEARCHITEM key='specialpages' value='[!pagetype!]' operator='eq' displayvalue=''/></SEARCHITEMS></PAGE></IODATA>").Replace("[!pagetype!]", $PageType).Replace("[!resultsize!]", $ResultSize);
+        $Request = ("<IODATA loginguid='[!guid_Login!]' sessionkey='[!key!]' dialoglanguageid='[!dialog_language_id!]'><PAGE action='xsearch' orderby='changedate' pagesize='[!resultsize!]'><SEARCHITEMS><SEARCHITEM key='specialpages' value='[!pagetype!]' operator='eq' /><SEARCHITEM key='createdate' value='[!createdate!]' operator='le' /></SEARCHITEMS></PAGE></IODATA>").Replace("[!pagetype!]", $PageType).Replace("[!resultsize!]", $ResultSize).Replace("[!createdate!]", $OACreateDate);
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
         Show-MSSessionWebServiceDebug;

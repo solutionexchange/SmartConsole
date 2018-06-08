@@ -24,12 +24,13 @@ $ResultProject.name;
 $Counter = 0;
 $CountTotal = 0;
 $LoopRun = 0;
+$OlderThanDays = -14;
 
 $RemovedUnlinkedPages = @();
 
 $ValuePercentComplete = 0;
 Write-Progress -Activity ("Working...") -PercentComplete ($ValuePercentComplete) -CurrentOperation ("{0}% complete" -f [math]::Round($ValuePercentComplete)) -Status ("Please wait - collecting data.");
-$UnlinkedPages = (Find-MSSpecialPages -PageType ("unlinked") -ResultSize 10000).SelectNodes("IODATA/PAGES/PAGE");
+$UnlinkedPages = (Find-MSSpecialPages -PageType ("unlinked") -ResultSize 10000 -CreateDate ((Get-Date).AddDays($OlderThanDays))).SelectNodes("IODATA/PAGES/PAGE");
 
 while ($UnlinkedPages.Count -gt 0) {
 

@@ -31,7 +31,7 @@ foreach ($ContentClassFolder in $AllProjectContentClassFolders) {
             ContentClass          = $ContentClass.name;
             MissingProjectVariant = @();
         }
-        Write-Progress -Activity ("Working... checking content class folder: {0}." -f $ContentClassFolder.name) -Status ("Please wait - check for missing project variants at content class: {0}." -f $ContentClass.name);
+        Write-Progress -Activity ("Working... checking content class folder: {0} ({1})." -f $ContentClassFolder.name,$AllContentClassesOfFolder.Count) -Status ("Please wait - check for missing project variants at content class: {0}." -f $ContentClass.name);
         $Results = ("");
         $ContentClassProjectVariants = (Get-MSContentClassProjectVariants -ContentClassGUID ($ContentClass.guid)).SelectNodes("IODATA/TEMPLATE/TEMPLATEVARIANTS/TEMPLATEVARIANT");
         if ($ContentClassProjectVariants -ne $null) {
@@ -53,8 +53,8 @@ foreach ($ContentClassFolder in $AllProjectContentClassFolders) {
     }
 }
 
-$MissingProjectVariants | Format-Table; # Optional - Output to console
-#$MissingProjectVariants | Out-File -FilePath ("C:\Temp\Result-MissingProjectVariants-{0}.txt" -f $WSMProjectGUID) -Encoding ("utf8") -Force; # Optional - Output to file
+#$MissingProjectVariants | Format-Table; # Optional - Output to console
+$MissingProjectVariants | Out-File -FilePath ("C:\Temp\Result-MissingProjectVariants-{0}.txt" -f $WSMProjectGUID) -Encoding ("utf8") -Force; # Optional - Output to file
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);
