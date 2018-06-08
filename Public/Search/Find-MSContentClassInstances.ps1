@@ -3,7 +3,7 @@ Function Find-MSContentClassInstances {
     .SYNOPSIS
         (Extended) Page Search > Content Class
     .DESCRIPTION
-        You can use this RQL to search for instances based on a content class guid. 
+        You can use this RQL to search for instances based on a specfic content class guid. 
     .EXAMPLE
         ... {EXAMPLE} ...
     .INPUTS
