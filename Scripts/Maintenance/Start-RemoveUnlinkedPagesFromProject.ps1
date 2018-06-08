@@ -24,7 +24,7 @@ $ResultProject.name;
 $Counter = 0;
 $CountTotal = 0;
 $LoopRun = 0;
-$OlderThanDays = -14;
+$OlderThanDays = -14; # Nur Seite welche vor 14 oder mehr Tagen erzeugt wurden.
 
 $RemovedUnlinkedPages = @();
 
