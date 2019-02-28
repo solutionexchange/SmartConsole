@@ -31,7 +31,7 @@ foreach ($ContentClassFolder in $AllProjectContentClassFolders) {
             ContentClass          = $ContentClass.name;
             MissingProjectVariant = @();
         }
-        Write-Progress -Activity ("Working... checking content class folder: {0} ({1})." -f $ContentClassFolder.name,$AllContentClassesOfFolder.Count) -Status ("Please wait - check for missing project variants at content class: {0}." -f $ContentClass.name);
+        Write-Progress -Activity ("Working... checking content class folder: {0} ({1})." -f $ContentClassFolder.name, $AllContentClassesOfFolder.Count) -Status ("Please wait - check for missing project variants at content class: {0}." -f $ContentClass.name);
         $Results = ("");
         $ContentClassProjectVariants = (Get-MSContentClassProjectVariants -ContentClassGUID ($ContentClass.guid)).SelectNodes("IODATA/TEMPLATE/TEMPLATEVARIANTS/TEMPLATEVARIANT");
         if ($ContentClassProjectVariants -ne $null) {

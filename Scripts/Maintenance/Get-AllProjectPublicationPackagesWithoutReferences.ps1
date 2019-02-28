@@ -44,8 +44,8 @@ foreach ($PublicationPackage in $AllProjectPublicatioNPackages) {
 
 Write-Progress -Activity ("Finished...") -PercentComplete ($ValuePercentComplete) -CurrentOperation ("{0}% complete" -f [math]::Round($ValuePercentComplete)) -Status ("Please wait - Sending output to console.");
 
-$PublicationPackagesNoReference; # Optional - Output to console
-#$PublicationPackagesNoReference | Out-File -FilePath ("C:\Temp\Result-PublicationPackagesNoReference-{0}.txt" -f $WSMProjectGUID) -Encoding ("utf8") -Force; # Optional - Output to file
+#$PublicationPackagesNoReference; # Optional - Output to console
+$PublicationPackagesNoReference | Out-File -FilePath ("C:\Temp\Result-PublicationPackagesNoReference-{0}.txt" -f $WSMProjectGUID) -Encoding ("utf8") -Force; # Optional - Output to file
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);
