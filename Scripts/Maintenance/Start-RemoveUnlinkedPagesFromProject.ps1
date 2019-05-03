@@ -10,7 +10,7 @@ Enter-MSSession -UseDefaults ($true);
 #$WSMProjectGUID = ("072d6659-a806-425b-aca8-d29f37fd6e7d"); # Vodafone Internet
 #$WSMProjectGUID = ("6A89CD93325D42FD81A42FA836547016"); # Vodafone Internet - Fachhandel Online
 #$WSMProjectGUID = ("107CB9590FBB4C1AB7B8F7FE2449EE85"); # Vodafone Internet - Innovation Park
-#$WSMProjectGUID = ("8C681C01ECE44FC8B1FB45C4A7760501"); # Vodafone Intranet
+#$WSMProjectGUID = ("8C681C01ECE44FC8B1FB45C4A7760501"); # Vodafone Intranet (AskVodafone)
 #$WSMProjectGUID = ("BA2A9869B57D4BA89E598F6B4B48F0B6"); # Vodafone Mobile
 #$WSMProjectGUID = ("771B99172E8B404794FA805EF961EF57"); # vodafone Applications - MobileApp
 #$WSMProjectGUID = ("8A300F4B74AA4D4CB5C54C2165FC56D1"); # Shared Components - Simplicity
@@ -57,7 +57,7 @@ while ($UnlinkedPages.Count -gt 0) {
 Write-Progress -Activity ("Finished...") -PercentComplete ($ValuePercentComplete) -CurrentOperation ("{0}% complete" -f [math]::Round($ValuePercentComplete)) -Status ("Please wait - Sending output to console.");
 
 #$RemovedUnlinkedPages | Select-Object -Property ("guid", "id", "headline", "status", "flags") | Format-Table; # Optional
-#$RemovedUnlinkedPages | Select-Object -Property ("guid", "id", "headline", "status", "flags") | Format-Table | Out-File -FilePath ("C:\Temp\Result-RemovedUnlinkedPages-{0}.txt" -f $WSMProjectGUID) -Encoding ("utf8") -Force; # Optional - Output to file
+#$RemovedUnlinkedPages | Select-Object -Property ("guid", "id", "headline", "status", "flags") | Format-Table | Out-File -FilePath ("C:\Temp\Result-RemovedUnlinkedPages-{0}-{1}.txt" -f $WSMProjectGUID, (Get-Date -Format ("yyyyMMdd-HHmmss"))) -Encoding ("utf8") -Force; # Optional - Output to file
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);

@@ -31,7 +31,7 @@ foreach ($ContentClassFolder in $AllProjectContentClassFolders) {
         }
         $Instances = (Find-MSContentClassInstances -ContentClassGUID ($ContentClass.guid) -PageSize (1000) -MaxHits (1000)).SelectNodes("IODATA/PAGES/PAGE");
         Write-Progress -Activity ("Working... checking content class folder: {0} ({1})." -f $ContentClassFolder.name, $AllContentClassesOfFolder.Count) -Status ("Please wait - check for instances at content class: {0}." -f $ContentClass.name);
-        if ($Instances.Count -gt 750) {
+        if ($Instances.Count -le 3) {
             $ResultObject.ContentClassInstances = $Instances.Count;
             $AmountContentClassWithoutInstances += $ResultObject;
         }
@@ -39,7 +39,7 @@ foreach ($ContentClassFolder in $AllProjectContentClassFolders) {
 }
 
 #$AmountContentClassWithoutInstances | Format-Table; # Optional - Output to console
-$AmountContentClassWithoutInstances | Out-File -FilePath ("C:\Temp\Result-AmountContentClassWithoutInstances-{0}.txt" -f $WSMProjectGUID) -Encoding ("utf8") -Force; # Optional - Output to file
+$AmountContentClassWithoutInstances | Out-File -FilePath ("C:\Temp\Result-AmountContentClassWithoutInstances-{0}-{1}.txt" -f $WSMProjectGUID, (Get-Date -Format ("yyyyMMdd-HHmmss"))) -Encoding ("utf8") -Force; # Optional - Output to file
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);

@@ -39,7 +39,7 @@ foreach ($ContentClassFolder in $AllProjectContentClassFolders) {
             if ($Results) {
                 $MissingProjectVariant = @();
                 foreach ($Result in $Results) {
-                    $MissingProjectVariant += ($AllProjectVariants | Where-Object {$_.guid -eq $Result}).name;
+                    $MissingProjectVariant += ($AllProjectVariants | Where-Object { $_.guid -eq $Result }).name;
                 }
                 $ResultObject.MissingProjectVariant = $MissingProjectVariant;
                 $MissingProjectVariants += $ResultObject;
@@ -54,7 +54,7 @@ foreach ($ContentClassFolder in $AllProjectContentClassFolders) {
 }
 
 #$MissingProjectVariants | Format-Table; # Optional - Output to console
-$MissingProjectVariants | Out-File -FilePath ("C:\Temp\Result-MissingProjectVariants-{0}.txt" -f $WSMProjectGUID) -Encoding ("utf8") -Force; # Optional - Output to file
+$MissingProjectVariants | Out-File -FilePath ("C:\Temp\Result-MissingProjectVariants-{0}-{1}.txt" -f $WSMProjectGUID, (Get-Date -Format ("yyyyMMdd-HHmmss"))) -Encoding ("utf8") -Force; # Optional - Output to file
 
 #Show-MSSession; # Optional
 Exit-MSSession -UseDefaults ($true);
