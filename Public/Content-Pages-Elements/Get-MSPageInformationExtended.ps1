@@ -19,7 +19,7 @@
                 Mandatory = $false,
                 ParameterSetName = 'byMSSession'
         )]
-        [Boolean] $Keywords = 0
+        [Boolean] $Keywords = $false
     )
     begin {
         Write-Debug -Message ("[ Enter => function {0} ]" -f $MyInvocation.MyCommand);

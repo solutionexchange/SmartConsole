@@ -477,6 +477,7 @@ The publication package on the project node provides the publication settings fo
 - `Start-RemoveUnlinkedPagesFromProject.ps1`
 - `Get-AllContentClassesWithoutProjectVariantAssignment.ps1`
 - `Get-AllProjectPublicationPackagesWithoutReferences.ps1`
+- `Measure-PagePreviewPerformance.ps1`
 
 
 
@@ -514,3 +515,8 @@ The publication package on the project node provides the publication settings fo
 - `Get-AllUsersOnSystemSortByID.ps1`
 
 
+
+
+##### Reports
+
+- `Send-MaintenanceReport.ps1`

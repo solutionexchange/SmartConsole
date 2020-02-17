@@ -8,6 +8,12 @@
     [Alias('Get-CMSPages')]
     [CmdletBinding(DefaultParameterSetName = 'byMSSession')]
     param(
+        [Parameter(
+                Position = 0,
+                Mandatory = $true,
+                ParameterSetName = 'byMSSession'
+        )]
+        [string[]] $Tags
     )
     begin {
         Write-Debug -Message ("[ Enter => function {0} ]" -f $MyInvocation.MyCommand);
@@ -25,6 +31,12 @@
         $Request = Import-MSSessionProperties -Request ($Request);
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
 
+        $Pages = $Response.SelectNodes("IODATA/PAGES/PAGE")
+        for ([int]$i = 0; $i -lt $Pages.Count; $i++)
+        {
+#            $ExtendedPageInformation = Get-MSPageInformationExtended -PageGUID $Pages[$i].GUID -Keywords $true
+#            [void]$Pages[$i].ParentNode.RemoveChild($Pages[$i])
+        }
         $Result = $Response.SelectNodes("IODATA/PAGES/PAGE");
 
         Show-MSSessionWebServiceDebug;

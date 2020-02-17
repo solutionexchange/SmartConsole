@@ -2,7 +2,36 @@
 
 about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
+## v0.3.0 - 2020-01-14
 
+### New Features
+
+- Added `Measure-PagePreviewPerformance.ps1` to get a list of pages in a project
+and how they perform with and without cache (Be careful when using, since they 
+delete the cache on the management server you configured)
+- Added `Send-MaintenanceReport` which accepts a `ReportData` parameter to 
+convert data to HTML and sent it to the recipients passed as argument. You can add
+custom templates to `Reports/Templates/$ReportName` folder which get merged with the 
+base template
+- Changed versioning to semantic versioning
+
+### Overview
+
+- Read the [OVERVIEW.md](Wiki/OVERVIEW.md) document for more information.
+
+### FAQ
+
+- Read the [FAQ.md](Wiki/FAQ.md) document for more information.
+
+### Known Issues
+
+- Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
+
+------
+
+### Breaking changes
+
+- No breaking changes have been introduced
 
 ## v0.2.7 - 2018-05-22
 

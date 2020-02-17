@@ -13,7 +13,13 @@
                 Mandatory = $true,
                 ParameterSetName = 'byMSSession'
         )]
-        [string] $ProjectGUID
+        [string] $ProjectGUID,
+        [Parameter(
+                Position = 1,
+                Mandatory = $true,
+                ParameterSetName = 'byMSSession'
+        )]
+        [string[]] $Tags
     )
     begin {
         Write-Debug -Message ("[ Enter => function {0} ]" -f $MyInvocation.MyCommand);
@@ -31,24 +37,27 @@
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
 
-        $ProjectPages = Get-MSPages
+        $ProjectPages = Get-MSPages -Tags $Tags
         $PerformanceResults = @()
 
         foreach ($ProjectPage in $ProjectPages) {
             $PerformanceResult = New-Object -TypeName PSObject
-            Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name Guid -Value $ProjectPage.GUID
             Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name Id -Value $ProjectPage.id
+            Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name Guid -Value $ProjectPage.GUID
             Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name Headline -Value $ProjectPage.headline
 
             Remove-MSPageCache -PageGuids ($PerformanceResult.Guid) | Out-Null
 
-            Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name Time -Value (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.GUID})
-            Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name TimeCached -Value (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.GUID})
+            $PreviewTime = (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.GUID})
+            $PreviewTimeCached = (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.GUID})
+
+            Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name Time -Value "$($PreviewTime.Seconds).$($PreviewTime.MilliSeconds)"
+            Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name TimeCached -Value "$($PreviewTimeCached.Seconds).$($PreviewTimeCached.MilliSeconds)"
 
             $PerformanceResults += $PerformanceResult
         }
 
-        return $PerformanceResults
+        return $PerformanceResults.GetEnumerator() | Sort-Object -Property TimeCached -Descending
     }
     end {
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);
