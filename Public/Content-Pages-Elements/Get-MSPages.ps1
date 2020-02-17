@@ -32,11 +32,30 @@
         [xml]$Response = Invoke-MSRQLRequest -Request ($Request);
 
         $Pages = $Response.SelectNodes("IODATA/PAGES/PAGE")
-        for ([int]$i = 0; $i -lt $Pages.Count; $i++)
+
+        if ($null -ne $Tags)
         {
-#            $ExtendedPageInformation = Get-MSPageInformationExtended -PageGUID $Pages[$i].GUID -Keywords $true
-#            [void]$Pages[$i].ParentNode.RemoveChild($Pages[$i])
+            for ([int]$i = 0; $i -lt $Pages.Count; $i++)
+            {
+                $PageTagSupport = $false
+
+                $ExtendedPageInformation = Get-MSPageInformationExtended -PageGUID $Pages[$i].GUID -Keywords $true
+                $Keywords = $ExtendedPageInformation.SelectNodes("IODATA/PAGE/CATEGORIES/CATEGORY/KEYWORDS/KEYWORD")
+                foreach ($Keyword in $Keywords)
+                {
+                    if ($Tags.Contains($Keyword.Value))
+                    {
+                        $PageTagSupport = $true
+                    }
+                }
+
+                if ($false -eq $PageTagSupport)
+                {
+                    [void]$Pages[$i].ParentNode.RemoveChild($Pages[$i])
+                }
+            }
         }
+
         $Result = $Response.SelectNodes("IODATA/PAGES/PAGE");
 
         Show-MSSessionWebServiceDebug;

@@ -26,7 +26,8 @@
                 Mandatory = $true,
                 ParameterSetName = 'byMSSession'
         )]
-        $ReportData
+        [AllowNull()]
+        $ReportData = $null
     )
     begin {
         Write-Debug -Message ("[ Enter => function {0} ]" -f $MyInvocation.MyCommand);
@@ -34,6 +35,7 @@
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
 
+        # Check if a HTML template for the given report name exists and assign it to PreContenta nd PostContent params
         $Files = @("PreContent", "PostContent")
         foreach ($File in $Files)
         {
@@ -47,6 +49,8 @@
             }
         }
 
+        # In these next few lines we merge the base report html templates with report specific html templates
+        # and replace some variables for report data
         $PreContentParam = (Get-Content -Path $PSScriptRoot/Templates/Base/PreContent.html)
         if ($null -ne (Get-Variable -Name "PreContent" -ValueOnly))
         {
