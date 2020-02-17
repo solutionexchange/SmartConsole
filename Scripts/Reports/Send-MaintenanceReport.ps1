@@ -27,10 +27,24 @@
                 ParameterSetName = 'byMSSession'
         )]
         [AllowNull()]
-        $ReportData = $null
+        $ReportData = $null,
+        [Parameter(
+                Position = 3,
+                Mandatory = $false,
+                ParameterSetName = 'byMSSession'
+        )]
+        [Switch] $AsPlainText
     )
     begin {
         Write-Debug -Message ("[ Enter => function {0} ]" -f $MyInvocation.MyCommand);
+
+        Register-MSConfigStore;
+
+        Set-MSConfigDebugMode -Value ($false); # $true oder $false
+
+        Register-MSSession -UseDefaults ($true);
+        Select-MSSession -UseDefaults ($true);
+        Enter-MSSession -UseDefaults ($true);
     }
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
@@ -59,16 +73,34 @@
         $PreContentParam = $PreContentParam.Replace("%ReportName%", $ReportName)
         $PreContentParam = $PreContentParam.Replace("%Date%", (Get-Date -Format "dd.MM.yyy"))
         $PreContentParam = $PreContentParam.Replace("%Time%", (Get-Date -Format "HH:mm:ss"))
+        $PreContentParam = $PreContentParam.Replace("%Cluster%", (([System.Uri](Get-MSSessionProperty -Name ("Uri")))).Host)
+        $PreContentParam = $PreContentParam.Replace("%Username%", (Get-MSSessionProperty -Name ("Username")))
 
         $PostContentParam = (Get-Content -Path $PSScriptRoot/Templates/Base/PostContent.html)
         if ($null -ne (Get-Variable -Name "PostContent" -ValueOnly))
         {
             $PostContentParam += Get-Content -Path (Get-Variable -Name "PostContent" -ValueOnly)
         }
+        $Body = $ReportData | ConvertTo-Html -PreContent $PreContentParam -PostContent $PostContentParam -Head  (Get-Content -Path $PSScriptRoot/Templates/Base/Head.html) | Out-String
 
-        return $ReportData | ConvertTo-Html -PreContent $PreContentParam -PostContent $PostContentParam -Head  (Get-Content -Path $PSScriptRoot/Templates/Base/Head.html)
+        if ($true -eq $AsPlainText)
+        {
+            return $Body
+        }
+        else
+        {
+            $MailConfig = Get-Content -Path $PSScriptRoot/mail.config.json | ConvertFrom-Json
+            $Password = ConvertTo-SecureString -String $MailConfig.SmtpPassword -AsPlainText -Force
+            $Credentials = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $MailConfig.SmtpUsername, $Password
+            Send-MailMessage -From $MailConfig.From -to $Recipients -Subject "Report: $( $ReportName )" -Body $Body -SmtpServer $MailConfig.SmtpServer -Port $MailConfig.SmtpPort -UseSsl -Credential $Credentials
+        }
     }
     end {
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);
+
+        Exit-MSSession -UseDefaults ($true);
+        Unregister-MSSession -UseDefaults ($true);
+
+        Unregister-MSConfigStore;
     }
 }

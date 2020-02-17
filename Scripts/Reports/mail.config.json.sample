@@ -1,0 +1,7 @@
+﻿{
+  "From": "from@example.com",
+  "SmtpServer": "smtp.example.com",
+  "SmtpPort": "2525",
+  "SmtpUsername": "UsernameAsPlainText",
+  "SmtpPassword": "PasswordAsPlainText"
+}
