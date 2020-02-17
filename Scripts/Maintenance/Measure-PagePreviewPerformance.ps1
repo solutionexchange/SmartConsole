@@ -41,18 +41,17 @@
         $PerformanceResults = @()
 
         foreach ($ProjectPage in $ProjectPages) {
-            $PerformanceResult = New-Object -TypeName PSObject
-            Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name Id -Value $ProjectPage.id
-            Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name Guid -Value $ProjectPage.GUID
-            Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name Headline -Value $ProjectPage.headline
+            Remove-MSPageCache -PageGuids ($ProjectPage.guid) | Out-Null
+            $PreviewTime = (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.guid})
+            $PreviewTimeCached = (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.guid})
 
-            Remove-MSPageCache -PageGuids ($PerformanceResult.Guid) | Out-Null
-
-            $PreviewTime = (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.GUID})
-            $PreviewTimeCached = (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.GUID})
-
-            Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name Time -Value "$($PreviewTime.Seconds).$($PreviewTime.MilliSeconds)"
-            Add-Member -InputObject $PerformanceResult -MemberType NoteProperty -Name TimeCached -Value "$($PreviewTimeCached.Seconds).$($PreviewTimeCached.MilliSeconds)"
+            $PerformanceResult = [pscustomobject][ordered]@{
+                Id         = $ProjectPage.id;
+                Guid       = $ProjectPage.guid;
+                Headline   = $ProjectPage.headline;
+                Time       = "$($PreviewTime.Seconds).$($PreviewTime.MilliSeconds)";
+                TimeCached = "$($PreviewTimeCached.Seconds).$($PreviewTimeCached.MilliSeconds)";
+            }
 
             $PerformanceResults += $PerformanceResult
         }
