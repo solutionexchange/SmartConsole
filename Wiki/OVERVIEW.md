@@ -478,6 +478,7 @@ The publication package on the project node provides the publication settings fo
 - `Get-AllContentClassesWithoutProjectVariantAssignment.ps1`
 - `Get-AllProjectPublicationPackagesWithoutReferences.ps1`
 - `Measure-PagePreviewPerformance.ps1`
+- `Get-AllContentClassesInEditing.ps1`
 
 
 
