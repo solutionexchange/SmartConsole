@@ -1,2 +1,4 @@
 Private/Store/configuration.xml
 *.pwd
+.idea/
+mail.config.json
