@@ -37,6 +37,14 @@
     )
     begin {
         Write-Debug -Message ("[ Enter => function {0} ]" -f $MyInvocation.MyCommand);
+
+        Register-MSConfigStore;
+
+        Set-MSConfigDebugMode -Value ($false); # $true oder $false
+
+        Register-MSSession -UseDefaults ($true);
+        Select-MSSession -UseDefaults ($true);
+        Enter-MSSession -UseDefaults ($true);
     }
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
@@ -67,5 +75,10 @@
     }
     end {
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);
+
+        Exit-MSSession -UseDefaults ($true);
+        Unregister-MSSession -UseDefaults ($true);
+
+        Unregister-MSConfigStore;
     }
 }

@@ -31,7 +31,7 @@
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
 
-        $AllContentClassesOfFolder = (Get-MsContentClasses -ContentClassFolderGUID ($ContentClassFolder.guid)).SelectNodes("IODATA/TEMPLATES/TEMPLATE");
+        $AllContentClassesOfFolder = (Get-MSContentClasses -ContentClassFolderGUID ($ContentClassFolder.guid)).SelectNodes("IODATA/TEMPLATES/TEMPLATE");
 
         $Result = @()
         foreach ($ContentClass in $AllContentClassesOfFolder) {
