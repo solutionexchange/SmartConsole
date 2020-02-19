@@ -10,12 +10,6 @@
     param(
         [Parameter(
                 Position = 0,
-                Mandatory = $true,
-                ParameterSetName = 'byMSSession'
-        )]
-        [string] $ProjectGUID,
-        [Parameter(
-                Position = 1,
                 Mandatory = $false,
                 ParameterSetName = 'byMSSession'
         )]
@@ -32,13 +26,12 @@
         Select-MSSession -UseDefaults ($true);
         Enter-MSSession -UseDefaults ($true);
 
-        Enter-MSProject -ProjectGUID ($ProjectGUID) | Out-Null;
+        Enter-MSProject -ProjectGUID (Get-MSSessionProperty -Name ("ProjectGUID")) | Out-Null;
     }
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
 
-        $ContentClasses = Get-MSContentClasses -ContentClassFolderGUID $ContentClassFolderGUID
-        $AllContentClassesOfFolder = (Get-MsContentClasses -ContentClassFolderGUID ($ContentClassFolder.guid)).SelectNodes("IODATA/TEMPLATES/TEMPLATE");
+        $AllContentClassesOfFolder = (Get-MSContentClasses -ContentClassFolderGUID ($ContentClassFolder.guid)).SelectNodes("IODATA/TEMPLATES/TEMPLATE");
 
         $Result = @()
         foreach ($ContentClass in $AllContentClassesOfFolder) {
@@ -68,7 +61,7 @@
             }
         }
 
-        return $Result.GetEnumerator() | Sort-Object -Property Lockdate
+        return $Result
     }
     end {
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);

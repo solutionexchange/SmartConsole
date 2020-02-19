@@ -479,6 +479,7 @@ The publication package on the project node provides the publication settings fo
 - `Get-AllProjectPublicationPackagesWithoutReferences.ps1`
 - `Measure-PagePreviewPerformance.ps1`
 - `Get-AllContentClassesInEditing.ps1`
+- `Get-AllContentClassesWithNElements.ps1`
 
 
 
@@ -505,7 +506,53 @@ The publication package on the project node provides the publication settings fo
 - `Get-AllProjectsForUser.ps1`
 
 
+##### Reports
+You can use the `SmartConsoleReporting.psm1` file to import all modules
+suitable for reporting
 
+The report scripts are used to generate HTML reports from other CMDlets.
+There is a single PowerShell script 'Send-MaintenanceReport' that
+accepts any value for the `$ReportData` parameter, which is then rendered 
+into an HTML page, which means you must ensure that '$ReportData' can also be rendered.
+ 
+
+###### Generating a report
+To generate a report, create a new generator in '/Scripts/Reports/Generators'.
+and give them an easily identifiable name, such as `{CMD-LET-USED-FOR-REPORT}-Report`.
+In the report generator, call up the CMDLet for which you want to create a report
+and modify it to your needs
+
+Current generators are
+
+- `Get-AllContentClassesInEditingReport.ps1`
+- `Get-AllContentClassesWithNElementsReport.ps1`
+- `Get-PagePreviewPerformanceReport.ps1`
+
+###### Templates
+The templates folder contains HTML templates that will be used to generate the report.
+For all reports the HTML templates inside `Base` will be used as a template
+If you need specific report data add a folder with the CMDlet name you want to create a report for
+and add a `PreContent.html` or `PostContent.html` which will then be added before/after the generated HTML
+inside your Generator
+
+###### Sending emails
+Once you created all generators and templates you can use the `Send-MaintenanceReport` cmdlet
+to send the report to either a text output (by using the `-AsPlainText` parameter) or email
+
+Please make sure that you have a correct `mail.config.json` since that file will be used
+to send an email
+
+One example to generate a report for retrieving all content classes which are in editing is
+
+`Send-MaintenanceReport -Recipients ("recipient@vodafone.com") -ReportName "Get-
+AllContentClassesInEditing" -ReportData (Get-AllContentClassesInEditingReport)
+
+or
+
+`Send-MaintenanceReport -Recipients ("recipient@vodafone.com") -ReportName "Get-
+AllContentClassesInEditing" -ReportData (Get-AllContentClassesInEditingReport) -AsPlainText | Out-File "C:\inediting.html"`
+
+to send the output to a file instead.
 
 ##### Users
 
@@ -514,10 +561,3 @@ The publication package on the project node provides the publication settings fo
 - `Get-AllUsersOfProject.ps1`
 - `Get-AllUsersOnSystem.ps1`
 - `Get-AllUsersOnSystemSortByID.ps1`
-
-
-
-
-##### Reports
-
-- `Send-MaintenanceReport.ps1`

@@ -13,12 +13,6 @@
                 Mandatory = $true,
                 ParameterSetName = 'byMSSession'
         )]
-        [string] $ProjectGUID,
-        [Parameter(
-                Position = 1,
-                Mandatory = $true,
-                ParameterSetName = 'byMSSession'
-        )]
         [string[]] $Tags
     )
     begin {
@@ -32,12 +26,21 @@
         Select-MSSession -UseDefaults ($true);
         Enter-MSSession -UseDefaults ($true);
 
-        Enter-MSProject -ProjectGUID ($ProjectGUID) | Out-Null;
+        Enter-MSProject -ProjectGUID (Get-MSSessionProperty -Name ("ProjectGUID")) | Out-Null;
     }
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
 
-        $ProjectPages = Get-MSPages -Tags $Tags
+        $CategorySearchConfiguration = @()
+        foreach ($Tag in $Tags)
+        {
+            $CategorySearchConfiguration += [pscustomobject][ordered] @{
+                CategoryGuid = $Tag
+                Operator = "eq"
+            }
+        }
+
+        $ProjectPages = Find-MSPages -CategorySearchConfiguration $CategorySearchConfiguration
         $PerformanceResults = @()
 
         foreach ($ProjectPage in $ProjectPages) {
@@ -56,7 +59,7 @@
             $PerformanceResults += $PerformanceResult
         }
 
-        return $PerformanceResults.GetEnumerator() | Sort-Object -Property TimeCached -Descending
+        return $PerformanceResults
     }
     end {
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);
