@@ -9,7 +9,7 @@ about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 - Added `Measure-PagePreviewPerformance.ps1` to get a list of pages in a project
 and how they perform with and without cache (Be careful when using, since they 
 delete the cache on the management server you configured)
-- Added `Get-AllContentClassesInEditing.ps` to get a list of content classes
+- Added `Get-AllContentClassesInEditing.ps1` to get a list of content classes
 which templates are being edited right now based on variant, time locked and locked by 
 - Added `Send-MaintenanceReport` which accepts a `ReportData` parameter to 
 convert data to HTML and sent it to the recipients passed as argument. You can add

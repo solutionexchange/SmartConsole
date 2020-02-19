@@ -13,12 +13,6 @@
                 Mandatory = $true,
                 ParameterSetName = 'byMSSession'
         )]
-        [string] $ProjectGUID,
-        [Parameter(
-                Position = 1,
-                Mandatory = $true,
-                ParameterSetName = 'byMSSession'
-        )]
         [string[]] $Tags
     )
     begin {
@@ -32,7 +26,7 @@
         Select-MSSession -UseDefaults ($true);
         Enter-MSSession -UseDefaults ($true);
 
-        Enter-MSProject -ProjectGUID ($ProjectGUID) | Out-Null;
+        Enter-MSProject -ProjectGUID (Get-MSSessionProperty -Name ("ProjectGUID")) | Out-Null;
     }
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
@@ -42,6 +36,7 @@
 
         foreach ($ProjectPage in $ProjectPages) {
             Remove-MSPageCache -PageGuids ($ProjectPage.guid) | Out-Null
+            # todo - check if there are timing problems since cache invalidation is an async process
             $PreviewTime = (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.guid})
             $PreviewTimeCached = (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.guid})
 
@@ -56,7 +51,7 @@
             $PerformanceResults += $PerformanceResult
         }
 
-        return $PerformanceResults.GetEnumerator() | Sort-Object -Property TimeCached -Descending
+        return $PerformanceResults
     }
     end {
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);

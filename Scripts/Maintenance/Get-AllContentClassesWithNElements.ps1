@@ -1,10 +1,10 @@
-﻿function Get-AllContentClassesInEditing
+﻿function Get-AllContentClassesWithNElements
 {
     <#
     .SYNOPSIS
-        Retrieves all content classes which are currently being edited
+        Retrieves all content classes which have more than a specific number of elements
     .DESCRIPTION
-        With this CMDlet you can get a report about which content classes are being edited and since when
+        Retrieves all content classes which have more than a specific number of elements
     #>
     [CmdletBinding(DefaultParameterSetName = 'byMSSession')]
     param(
@@ -13,7 +13,7 @@
                 Mandatory = $false,
                 ParameterSetName = 'byMSSession'
         )]
-        [string] $ContentClassFolderGUID
+        [int] $ElementThreshold = 25
     )
     begin {
         Write-Debug -Message ("[ Enter => function {0} ]" -f $MyInvocation.MyCommand);
@@ -36,29 +36,20 @@
         $Result = @()
         foreach ($ContentClass in $AllContentClassesOfFolder) {
             $ContentClassProperties = Get-MSContentClassAllProperties -ContentClassGUID $ContentClass.guid
-            $TemplateVariants = $ContentClassProperties.SelectNodes("IODATA/TEMPLATE/TEMPLATEVARIANTS")
-            foreach ($TemplateVariant in $TemplateVariants)
-            {
-                if ($TemplateVariant.lock -eq "1")
-                {
-                    foreach ($TemplateVariantAtom in $TemplateVariants.SelectNodes("TEMPLATEVARIANT"))
-                    {
-                        if ($TemplateVariantAtom.draft -eq "1")
-                        {
-                            # Using ordered so we can assure this is the correct order of attributes
-                            $ResultObject = [pscustomobject][ordered]@{
-                                ContentClassName = $ContentClass.name
-                                TemplateVariant = $TemplateVariantAtom.name
-                                Guid = $TemplateVariantAtom.guid
-                                Lockdate = $TemplateVariantAtom.changeddate | ConvertFrom-OADate
-                                Lockuser = $TemplateVariantAtom.changedusername
-                            }
+            $Elements = $ContentClassProperties.SelectNodes("IODATA/TEMPLATE/ELEMENTS/ELEMENT")
 
-                            $Result += $ResultObject
-                        }
-                    }
-                }
+            if ($Elements.Count -lt $ElementThreshold)
+            {
+                continue;
             }
+
+            $ContentClassData = [pscustomobject][ordered]@{
+                ContentClassName = $ContentClass.name
+                ContentClassGuid = $ContentClass.guid
+                ElementCount = $Elements.Count
+            }
+
+            $Result += $ContentClassData
         }
 
         return $Result
