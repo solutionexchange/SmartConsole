@@ -43,8 +43,6 @@
         $ProjectPages = Find-MSPages -CategorySearchConfiguration $CategorySearchConfiguration
         $PerformanceResults = @()
 
-        Write-Host $ProjectPages.Count
-
         foreach ($ProjectPage in $ProjectPages) {
             Remove-MSPageCache -PageGuids ($ProjectPage.guid) | Out-Null
             $PreviewTime = (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.guid})

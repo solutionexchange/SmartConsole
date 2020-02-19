@@ -507,6 +507,9 @@ The publication package on the project node provides the publication settings fo
 
 
 ##### Reports
+You can use the `SmartConsoleReporting.psm1` file to import all modules
+suitable for reporting
+
 The report scripts are used to generate HTML reports from other CMDlets.
 There is a single PowerShell script 'Send-MaintenanceReport' that
 accepts any value for the `$ReportData` parameter, which is then rendered 

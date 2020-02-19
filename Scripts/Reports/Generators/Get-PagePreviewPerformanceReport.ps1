@@ -21,9 +21,10 @@
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
 
-        $Result = (Measure-PagePreviewPerformance -Tags $Tags).GetEnumerator() | Sort-Object -Property TimeCached -Descending
+        $Result = (Measure-PagePreviewPerformance -Tags $Tags).GetEnumerator() | Sort-Object {[double]$_.Time} -Descending
 
-        return $Result | ConvertTo-Html
+        $PreContent = (Get-Content -Path $PSScriptRoot/../Templates/PagePreviewPerformance/PreContent.html).Replace("%Tags%", ($Tags -join ","))
+        return  $PreContent + ($Result | ConvertTo-Html)
     }
     end {
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);
