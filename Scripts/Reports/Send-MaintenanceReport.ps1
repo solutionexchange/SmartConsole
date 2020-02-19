@@ -49,39 +49,17 @@
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
 
-        # Check if a HTML template for the given report name exists and assign it to PreContenta nd PostContent params
-        $Files = @("PreContent", "PostContent")
-        foreach ($File in $Files)
-        {
-            if (Test-Path $PSScriptRoot/Templates/$ReportName/$File.html -PathType Leaf)
-            {
-                Set-Variable -Name $File -Value $PSScriptRoot/Templates/$ReportName/$File.html
-            }
-            else
-            {
-                Set-Variable -Name $File -Value $null
-            }
-        }
+        $PreContent = Get-Content -Path $PSScriptRoot/Templates/Base/PreContent.html
+        $PreContent = $PreContent.Replace("%ReportName%", $ReportName)
+        $PreContent = $PreContent.Replace("%Date%", (Get-Date -Format "dd.MM.yyy"))
+        $PreContent = $PreContent.Replace("%Time%", (Get-Date -Format "HH:mm:ss"))
+        $PreContent = $PreContent.Replace("%Cluster%", (([System.Uri](Get-MSSessionProperty -Name ("Uri")))).Host)
+        $PreContent = $PreContent.Replace("%Username%", (Get-MSSessionProperty -Name ("Username")))
 
-        # In these next few lines we merge the base report html templates with report specific html templates
-        # and replace some variables for report data
-        $PreContentParam = (Get-Content -Path $PSScriptRoot/Templates/Base/PreContent.html)
-        if ($null -ne (Get-Variable -Name "PreContent" -ValueOnly))
-        {
-            $PreContentParam += Get-Content -Path (Get-Variable -Name "PreContent" -ValueOnly)
-        }
-        $PreContentParam = $PreContentParam.Replace("%ReportName%", $ReportName)
-        $PreContentParam = $PreContentParam.Replace("%Date%", (Get-Date -Format "dd.MM.yyy"))
-        $PreContentParam = $PreContentParam.Replace("%Time%", (Get-Date -Format "HH:mm:ss"))
-        $PreContentParam = $PreContentParam.Replace("%Cluster%", (([System.Uri](Get-MSSessionProperty -Name ("Uri")))).Host)
-        $PreContentParam = $PreContentParam.Replace("%Username%", (Get-MSSessionProperty -Name ("Username")))
+        $PostContent = Get-Content -Path $PSScriptRoot/Templates/Base/PostContent.html
 
-        $PostContentParam = (Get-Content -Path $PSScriptRoot/Templates/Base/PostContent.html)
-        if ($null -ne (Get-Variable -Name "PostContent" -ValueOnly))
-        {
-            $PostContentParam += Get-Content -Path (Get-Variable -Name "PostContent" -ValueOnly)
-        }
-        $Body = $ReportData | ConvertTo-Html -PreContent $PreContentParam -PostContent $PostContentParam -Head  (Get-Content -Path $PSScriptRoot/Templates/Base/Head.html) | Out-String
+        $Body = ConvertTo-Html -PreContent $PreContent -PostContent $PostContent -Head  (Get-Content -Path $PSScriptRoot/Templates/Base/Head.html) | Out-String
+        $Body = $Body.Replace("%Content%", $ReportData)
 
         if ($true -eq $AsPlainText)
         {
