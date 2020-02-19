@@ -31,12 +31,22 @@
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
 
-        $ProjectPages = Get-MSPages -Tags $Tags
+        $CategorySearchConfiguration = @()
+        foreach ($Tag in $Tags)
+        {
+            $CategorySearchConfiguration += [pscustomobject][ordered] @{
+                CategoryGuid = $Tag
+                Operator = "eq"
+            }
+        }
+
+        $ProjectPages = Find-MSPages -CategorySearchConfiguration $CategorySearchConfiguration
         $PerformanceResults = @()
+
+        Write-Host $ProjectPages.Count
 
         foreach ($ProjectPage in $ProjectPages) {
             Remove-MSPageCache -PageGuids ($ProjectPage.guid) | Out-Null
-            # todo - check if there are timing problems since cache invalidation is an async process
             $PreviewTime = (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.guid})
             $PreviewTimeCached = (Measure-Command {Get-MSPagePreview -PageGUID $ProjectPage.guid})
 
