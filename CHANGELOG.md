@@ -2,7 +2,7 @@
 
 about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
-## v0.3.0 - 2020-01-18
+## v0.3.0 - 2020-02-19
 
 ### New Features
 
