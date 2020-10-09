@@ -13,7 +13,7 @@
         # what and how to replace
         [Parameter(
                 Position = 0,
-                Mandatory = $false,
+                Mandatory = $true,
                 ParameterSetName = 'byMSSession'
         )]
         [string] $SearchAttribute,
@@ -21,7 +21,7 @@
         # of the given attribute to find a match
         [Parameter(
                 Position = 1,
-                Mandatory = $false,
+                Mandatory = $true,
                 ParameterSetName = 'byMSSession'
         )]
         [string] $SearchString,
@@ -32,10 +32,29 @@
          #>
         [Parameter(
                 Position = 2,
+                Mandatory = $true,
+                ParameterSetName = 'byMSSession'
+        )]
+        [string[]] $ReplaceStrings,
+        # The new targets need names that can identify the them, so we don't reuse the same name as the outdated target
+        # Please note, that this array must be size 1 our the same count as replace strings, otherwise an error will be thrown
+        #>
+        [Parameter(
+                Position = 3,
+                Mandatory = $true,
+                ParameterSetName = 'byMSSession'
+        )]
+        [string[]] $NewTargetNameSuffixes,
+        # If we cannot get the fingerprint of the server manually, we need to pass it in here in order to use SFTP.
+        # Must be the same number as ReplaceStrings or an error will be thrown
+        #>
+        [Parameter(
+                Position = 4,
                 Mandatory = $false,
                 ParameterSetName = 'byMSSession'
         )]
-        [string[]] $ReplaceStrings
+        [string[]] $Fingerprints
+
     )
     begin {
         Write-Debug -Message ("[ Enter => function {0} ]" -f $MyInvocation.MyCommand);
@@ -53,6 +72,12 @@
     }
     process {
         Write-Debug -Message ("[ Process => function {0} ]" -f $MyInvocation.MyCommand);
+
+        if ($NewTargetNameSuffixes.Count -ne 1 -and $NewTargetNameSuffixes.Count -ne $ReplaceStrings.Count)
+        {
+            Write-Error "Parameter NewTargetNameSuffixes must be an array with count of ONE or equal to count of ReplaceStrings"
+            return;
+        }
 
         $Projects = (Get-MSAllProjects).SelectNodes("IODATA/PROJECTS/PROJECT");
         foreach ($Project in $Projects)
@@ -82,11 +107,15 @@
             Enter-MSProject -ProjectGUID $Project.Guid | Out-Null
 
             $OutDatedTargetGuid = $null
+            # This map will hold information about the target (url) and the GUID the target will have
             $NewTargets = @{}
+            # Whereas this map will hold information about the target (url) and whether there exists a publication combination already
+            $PublicationCombinationMap = @{}
             foreach ($ReplaceString in $ReplaceStrings)
             {
                 # This is just a map for better performance when
                 $NewTargets.Add($ReplaceString, $null);
+                $PublicationCombinationMap.Add($ReplaceString, $false);
             }
 
             $PublishingTargets = (Get-MSPublishingTargets).SelectNodes("IODATA/EXPORTS/EXPORT")
@@ -111,6 +140,7 @@
                 $Report[$ProjectName] += "No outdated targets found"
                 continue;
             }
+
             $OutDatedTargetData = (Get-MSPublicationTargetData -PublicationTargetGUID $OutDatedTargetGuid).SelectSingleNode("IODATA/EXPORT")
             $PublishingTargetType = $OutDatedTargetData.type
 
@@ -118,67 +148,104 @@
             {
                 $Report[$ProjectName] += "Outdated publishing target is not of type SFTP and thus unsupported. Skipping..."
                 continue;
-            }
-
-            $OutDatedTargetData
-            # We now check if the given targets already exist, and if not, create new targets
-            foreach ($NewTargetKey in $NewTargets.Keys)
+            } elseif ($OutDatedTargetData.proxytype -ne 0)
             {
-                if ($null -eq $NewTargetKey)
-                {
-
-
-                }
-
+                $Report[$ProjectName] += "Outdated publishing target has proxy configuration and thus is unsupported. Skipping..."
             }
 
-#            $NewTargets
+            $Counter = 0;
+            # Because we cannot modify a collection we are iterating over, we need to copy the collection first
+            # so that we iterate over a copy and modify the original hashtable
+            $NewTargetsCopy = $NewTargets.Clone()
+            # We now check if the given targets already exist, and if not, create new targets
+            foreach ($NewTargetKey in $NewTargetsCopy.Keys)
+            {
+                if ($null -eq $NewTargets[$NewTargetKey])
+                {
+                    $Name = ($OutDatedTargetData.name + " " + $NewTargetNameSuffixes[$Counter])
+                    $Report[$ProjectName] += "Creating new target $Name..."
 
+                    # We're using a hash table to pass the parameters, because we want to dynamically be able to
+                    # replace a specific property which cannot be done otherwise.
+                    $Arguments = @{
+                        Name = $Name
+                        NoBOM = $OutDatedTargetData.nobom
+                        ReplaceCrlfWithLfinPublishedFile = $OutDatedTargetData.replacecrlfwithlfinpublishedfile
+                        Username = $OutDatedTargetData.username
+                        Password = $OutDatedTargetData.password
+                        Path = $OutDatedTargetData.path
+                        Port = $OutDatedTargetData.port
+                        UrlPrefix = $OutDatedTargetData.urlprefix
+                        Fingerprint = $Fingerprints[$Counter]
+                        KeyFile = $OutDatedTargetData.keyfile
+                        KeyFilePassword = $OutDatedTargetData.keyfilepassword
+                    }
+
+                    # This is the replacement we talked about before
+                    $Arguments[$SearchAttribute] = $NewTargetKey
+                    $NewTargets[$NewTargetKey] = (New-MSSftpPublicationPackage @Arguments).SelectSingleNode("IODATA").InnerXml
+
+                    $Counter++
+                }
+            }
 
 #            # We want to save publication target GUIDs that don't fit our matching, so that we don't do the same
 #            # request numerous times.
-#            $InvalidPublicationTargetGuidMap = @()
-#
-#            $ExportPackages = (Get-MSProjectPublicationPackages).SelectNodes("IODATA/EXPORTPACKETS/EXPORTPACKET")
-#            foreach ($ExportPackage in $ExportPackages)
-#            {
-#                $ExportPackageGuid = $ExportPackage.Guid
-#                $ExportPackageName = $ExportPackage.name
-#
-#                $ExportPackageSettings = (Get-MSPublicationPackageInformationData -PublicationPackageGUID -$ExportPackageGuid).SelectNodes("IODATA/EXPORTPACKET/EXPORTSETTINGS/EXPORTSETTING")
-#                foreach ($ExportPackageSetting in $ExportPackageSettings)
-#                {
-#                    $ProjectVariant = $ExportPackageSetting.projectvariantname
-#                    $LanguageVariant = $ExportPackageSetting.languagevariantname
-#
-#                    $ExportTargets = $ExportPackageSetting.SelectNodes("EXPORTTARGETS/EXPORTTARGET")
-#                    foreach ($ExportTarget in $ExportTargets)
-#                    {
-#                        $PublicationTargetGuid = $ExportTarget.guid
-#
-#                        if ($InvalidPublicationTargetGuidMap.Contains($PublicationTargetGuid))
-#                        {
-#                            continue;
-#                        }
-#
-#                        $SearchAttributeValue = (Get-MSPublicationTargetData -PublicationTargetGUID $PublicationTargetGuid).SelectSingleNode("IODATA/EXPORT").Attributes[$SearchAttribute].Value
-#
-#                        if ($SearchAttributeValue -eq $SearchString)
-#                        {
-#                            Write-Host "Matched $SearchAttributeValue..."
-#                        }
-#                    }
-#                }
-#
-#            }
-#            $InvalidPublicationTargetGuidMap = @()
-#
-#            $First = $true;
+            $InvalidPublicationTargetGuidMap = @()
+            $ExportPackages = (Get-MSProjectPublicationPackages).SelectNodes("IODATA/EXPORTPACKETS/EXPORTPACKET")
+
+            foreach ($ExportPackage in $ExportPackages)
+            {
+                $ExportPackageGuid = $ExportPackage.Guid
+
+                $ExportPackageSettings = (Get-MSPublicationPackageInformationData -PublicationPackageGUID -$ExportPackageGuid).SelectNodes("IODATA/EXPORTPACKET/EXPORTSETTINGS/EXPORTSETTING")
+                foreach ($ExportPackageSetting in $ExportPackageSettings)
+                {
+                    $PublicationCombinationGuid = $ExportPackageSetting.guid
+                    $ExportTargets = $ExportPackageSetting.SelectNodes("EXPORTTARGETS/EXPORTTARGET")
+                    $hasOutdatedTarget = $false;
+
+                    foreach ($ExportTarget in $ExportTargets)
+                    {
+                        $PublicationTargetGuid = $ExportTarget.guid
+
+                        # This is just for performance for further processing, so we don't need to ask for "invalid"
+                        # things
+                        if ($InvalidPublicationTargetGuidMap.Contains($PublicationTargetGuid))
+                        {
+                            continue;
+                        }
+
+                        if ($PublicationTargetGuid -eq $OutDatedTargetGuid)
+                        {
+                            $hasOutdatedTarget = $true
+                        } elseif ($PublicationCombinationMap.ContainsKey($PublicationTargetGuid))
+                        {
+                            $PublicationCombinationMap[$PublicationTargetGuid] = $true
+                        }
+                    }
+
+                    if ($hasOutdatedTarget -eq $false)
+                    {
+                        continue;
+                    }
+
+                    foreach ($PublicationCombinationMapKey in $PublicationCombinationMap.Keys)
+                    {
+                        if ($PublicationCombinationMap[$PublicationCombinationMapKey] -eq $false)
+                        {
+                            Set-MSPublishingTargetForPublicationCombination `
+                                -PublicationCombinationGuid $PublicationCombinationGuid`
+                                -PublishingTargetGuid $NewTargets[$PublicationCombinationMapKey] | Out-Null
+                        }
+                    }
+                }
+            }
 
         }
     }
     end {
-        $Report
+#        $Report
 
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);
 
