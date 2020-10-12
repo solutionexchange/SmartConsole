@@ -54,7 +54,6 @@
                 ParameterSetName = 'byMSSession'
         )]
         [string[]] $Fingerprints
-
     )
     begin {
         Write-Debug -Message ("[ Enter => function {0} ]" -f $MyInvocation.MyCommand);
@@ -160,7 +159,8 @@
             # We now check if the given targets already exist, and if not, create new targets
             foreach ($NewTargetKey in $NewTargetsCopy.Keys)
             {
-                if ($null -eq $NewTargets[$NewTargetKey])
+                $Value = $NewTargets[$NewTargetKey]
+                if ($null -eq $Value)
                 {
                     $Name = ($OutDatedTargetData.name + " " + $NewTargetNameSuffixes[$Counter])
                     $Report[$ProjectName] += "Creating new target $Name..."
@@ -187,13 +187,19 @@
 
                     $Counter++
                 }
+                else
+                {
+                    $Report[$ProjectName] += "Target for $NewTargetKey already exists ($Value). Not creating..."
+                }
             }
 
-#            # We want to save publication target GUIDs that don't fit our matching, so that we don't do the same
-#            # request numerous times.
+            # We want to save publication target GUIDs that don't fit our matching, so that we don't do the same
+            # request numerous times.
             $InvalidPublicationTargetGuidMap = @()
             $ExportPackages = (Get-MSProjectPublicationPackages).SelectNodes("IODATA/EXPORTPACKETS/EXPORTPACKET")
 
+            # Counter for number of added combinations
+            $AddedCounter = 0
             foreach ($ExportPackage in $ExportPackages)
             {
                 $ExportPackageGuid = $ExportPackage.Guid
@@ -234,6 +240,7 @@
                     {
                         if ($PublicationCombinationMap[$PublicationCombinationMapKey] -eq $false)
                         {
+                            $Counter++
                             Set-MSPublishingTargetForPublicationCombination `
                                 -PublicationCombinationGuid $PublicationCombinationGuid`
                                 -PublishingTargetGuid $NewTargets[$PublicationCombinationMapKey] | Out-Null
@@ -242,10 +249,12 @@
                 }
             }
 
+            $Report[$ProjectName] += "Added $AddedCounter new combinations in this project"
         }
+
+        return $Report
     }
     end {
-#        $Report
 
         Write-Debug -Message ("[ Leave => function {0} ]" -f $MyInvocation.MyCommand);
 

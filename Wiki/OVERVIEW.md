@@ -455,8 +455,21 @@ The publication package on the project node provides the publication settings fo
   `Get-CMSProjectPublicationPackages` *
 - `Get-MSPublicationPackageReferenceList` | 
   `Get-MSPublicationPackageReferenceList` *
+- `Get-MSPublicationPackageInformationData` |
+  `Get-MSPublicationPackageInformationData` *
+- `Set-MSPublishingTargetForPublicationCombination` |
+  `Set-CMSPublishingTargetForPublicationCombination` *
 
+##### Publishing Targets
 
+This section deals with queries involving publishing targets. A publishing target is a target (filepath, ftp, sftp, etc.) where data is published to. Publishing targets are assigned to publishing packages
+
+- `Get-MSPublicationTargetData` | 
+  `Get-CMSPublicationTargetData` *
+- `Get-MSPublishingTargets` | 
+  `Get-CMSPublishingTargets` *
+- `New-MSSftpPublicationPackage` |
+  `New-CMSSftpPublicationPackage` *
 
 ------
 
@@ -480,6 +493,7 @@ The publication package on the project node provides the publication settings fo
 - `Measure-PagePreviewPerformance.ps1`
 - `Get-AllContentClassesInEditing.ps1`
 - `Get-AllContentClassesWithNElements.ps1`
+- `Set-PublishingTargets.ps1`
 
 
 
@@ -527,6 +541,7 @@ Current generators are
 - `Get-AllContentClassesInEditingReport.ps1`
 - `Get-AllContentClassesWithNElementsReport.ps1`
 - `Get-PagePreviewPerformanceReport.ps1`
+- `Set-PublishingTargetsReport.ps1`
 
 ###### Templates
 The templates folder contains HTML templates that will be used to generate the report.
