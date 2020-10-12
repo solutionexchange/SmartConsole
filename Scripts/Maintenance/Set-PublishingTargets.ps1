@@ -242,7 +242,7 @@
                     {
                         if ($PublicationCombinationMap[$PublicationCombinationMapKey] -eq $false)
                         {
-                            $Counter++
+                            $AddedCounter++
                             Set-MSPublishingTargetForPublicationCombination `
                                 -PublicationCombinationGuid $PublicationCombinationGuid`
                                 -PublishingTargetGuid $NewTargets[$PublicationCombinationMapKey] | Out-Null
