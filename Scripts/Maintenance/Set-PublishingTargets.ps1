@@ -152,6 +152,8 @@
                 $Report[$ProjectName] += "Outdated publishing target has proxy configuration and thus is unsupported. Skipping..."
             }
 
+            $Report[$ProjectName] += "Project validated. Processing creation/setting of new publishing targets"
+
             $Counter = 0;
             # Because we cannot modify a collection we are iterating over, we need to copy the collection first
             # so that we iterate over a copy and modify the original hashtable
