@@ -37,7 +37,7 @@
         )]
         [string[]] $ReplaceStrings,
         # The new targets need names that can identify the them, so we don't reuse the same name as the outdated target
-        # Please note, that this array must be size 1 our the same count as replace strings, otherwise an error will be thrown
+        # Please note, that this array must be size 1 or the same count as ReplaceStrings, otherwise an error will be thrown
         #>
         [Parameter(
                 Position = 3,
@@ -53,7 +53,15 @@
                 Mandatory = $false,
                 ParameterSetName = 'byMSSession'
         )]
-        [string[]] $Fingerprints
+        [string[]] $Fingerprints,
+        # If included an given, the replacemenet will only be done in the projects with the given name
+        #>
+        [Parameter(
+                Position = 5,
+                Mandatory = $false,
+                ParameterSetName = 'byMSSession'
+        )]
+        [string[]] $InProjects
     )
     begin {
         Write-Debug -Message ("[ Enter => function {0} ]" -f $MyInvocation.MyCommand);
@@ -82,18 +90,16 @@
         foreach ($Project in $Projects)
         {
             $ProjectName = $Project.name
-            # TODO - Remove start
-            if ($ProjectName -ne "FastTrackTest1")
+            if ($InProjects.Length -gt 0 -and $InProjects.Contains($ProjectName))
             {
                 continue
             }
-            # TODO - Remove end
 
             $Report.Add($ProjectName, @())
 
             # Inhibitlevel tells us about the lock level of the system and
             # -1 stands for "Locked to all users including Server Manager"
-            # so since we can't access the projec tanyway, we can skip it.
+            # so since we can't access the project anyway, we can skip it.
             if ($Project.inhibitlevel -eq -1) {
                 $Report[$ProjectName] += "Project is locked. Skipping..."
                 continue;
@@ -108,11 +114,13 @@
             $OutDatedTargetGuid = $null
             # This map will hold information about the target (url) and the GUID the target will have
             $NewTargets = @{}
-            # Whereas this map will hold information about the target (url) and whether there exists a publication combination already
+            # Whereas this map will hold information about the target (url) and whether there exists a publication
+            # combination already
             $PublicationCombinationMap = @{}
             foreach ($ReplaceString in $ReplaceStrings)
             {
-                # This is just a map for better performance when
+                # This is just a map for better performance when going over the same target that doesn't need
+                # replacing multiple times, so we don't iterate over it more than once.
                 $NewTargets.Add($ReplaceString, $null);
                 $PublicationCombinationMap.Add($ReplaceString, $false);
             }
@@ -251,7 +259,7 @@
                 }
             }
 
-            $Report[$ProjectName] += "Added $AddedCounter new combinations in this project"
+#            $Report[$ProjectName] += "Added $AddedCounter new combinations in this project"
         }
 
         return $Report

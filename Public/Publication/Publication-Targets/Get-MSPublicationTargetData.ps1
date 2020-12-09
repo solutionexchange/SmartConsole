@@ -4,14 +4,6 @@
         Listing Publication Packages
     .DESCRIPTION
         You can list all existing publication packages in a project with name and GUID.
-    .EXAMPLE
-        ... {EXAMPLE} ...
-    .INPUTS
-        ... {INPUTS} ...
-    .OUTPUTS
-        ... {OUTPUTS} ...
-    .LINK
-        ... {LINK} ...
     .NOTES
         RQL: Listing Publication Packages, Software version >= 5.0
     #>

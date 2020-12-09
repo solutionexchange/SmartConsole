@@ -4,14 +4,6 @@
         Listing publishing targets
     .DESCRIPTION
         You can list all existing publishing targets in a project with name, GUID, path and type
-    .EXAMPLE
-        ... {EXAMPLE} ...
-    .INPUTS
-        ... {INPUTS} ...
-    .OUTPUTS
-        ... {OUTPUTS} ...
-    .LINK
-        ... {LINK} ...
     .NOTES
         RQL: Listing publishing targets, Software version >= 5.0
     #>
