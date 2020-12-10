@@ -2,6 +2,34 @@
 
 about **SmartConsole for Web Site Management** (Release 16.0 and also 11.2).
 
+## v0.4.0 - 2020-12-10
+
+- Added `Get-MSPublicationPackageInformationData.ps1` for listing informational data of Publication Package
+- Added `Set-MSPublishingTargetForPublicationCombination.ps1` for defining Publishing Targets for Publication Combination
+- Added `Get-MSPublicationTargetData.ps1` to retrieve data of a publication target
+- Added `Get-MSPublishingTargets.ps1` to retrieve publishing targets for a project
+- Added `New-MSSftPublicationPackage.ps1` to add a new publication package with SFTP upload
+- Added `Set-PublishingTargets.ps1` as a maintenance script to extend all publication package by new publication targets
+- Added `Set-PublishingTargetsReport.ps1` to create a report for the above added script
+
+### Overview
+
+- Read the [OVERVIEW.md](Wiki/OVERVIEW.md) document for more information.
+
+### FAQ
+
+- Read the [FAQ.md](Wiki/FAQ.md) document for more information.
+
+### Known Issues
+
+- Read the [KNOWNISSUES.md](Wiki/KNOWNISSUES.md) document for more information.
+
+------
+
+### Breaking changes
+
+- No breaking changes have been introduced
+
 ## v0.3.0 - 2020-02-19
 
 ### New Features
