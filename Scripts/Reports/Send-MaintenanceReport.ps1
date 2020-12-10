@@ -11,7 +11,7 @@
     param(
         [Parameter(
                 Position = 0,
-                Mandatory = $true,
+                Mandatory = $false,
                 ParameterSetName = 'byMSSession'
         )]
         [string[]] $Recipients,

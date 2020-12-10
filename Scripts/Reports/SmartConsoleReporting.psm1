@@ -8,7 +8,8 @@
     . $_.FullName
 }
 @( Get-ChildItem -Path "$PSScriptRoot\..\Maintenance\*.ps1" ) | ForEach-Object {
-    if ((Get-Content $_.FullName).StartsWith("function") -eq $true)
+    $Content = (Get-Content $_.FullName)
+    if ($Content.StartsWith("function") -eq $true -or $Content.StartsWith("Function") -eq $true)
     {
         . $_.FullName
     }
